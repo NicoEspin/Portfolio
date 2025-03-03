@@ -1,0 +1,214 @@
+//importar dinamicamente los logos
+const importAllLogos = import.meta.glob("../assets/icons/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+export const logos = Object.keys(importAllLogos).reduce((acc, path) => {
+  const fileName = path.replace("../assets/icons/", "");
+  acc[fileName] = importAllLogos[path];
+  return acc;
+}, {});
+
+//NAV
+export const navItems = [
+  { title: "About", href: "about" },
+  { title: "Skills", href: "skills" },
+  { title: "Experience", href: "experience" },
+  { title: "Projects", href: "projects" },
+  { title: "Contact", href: "contact" },
+];
+//NAV
+
+//HERO
+export const name = "Nicolas Espin";
+export const roles = [
+  "Full Stack Developer",
+  "Wordpress Developer",
+  "Bubble Developer",
+];
+export const description =
+  "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning, I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.";
+export const resumeLink =
+  "https://docs.google.com/document/d/1iLgZIBS7QwWeZ5vD7CncYoO3VJ0BKyYp/edit";
+
+export const githubLink = "https://github.com/NicoEspin";
+export const linkedinLink =
+  "https://www.linkedin.com/in/nicol%C3%A1s-espin-2b59a0183/";
+
+//Skills
+export const skills = [
+  {
+    title: "Frontend",
+    skills: [
+      {
+        name: "React.js",
+        logo: logos["react.svg"],
+      },
+      {
+        name: "Tailwind",
+        logo: logos["tailwind.svg"],
+      },
+      {
+        name: "Javascript",
+        logo: logos["js.svg"],
+      },
+      {
+        name: "CSS",
+        logo: logos["css.svg"],
+      },
+      {
+        name: "HTML",
+        logo: logos["html.svg"],
+      },
+      {
+        name: "Redux",
+        logo: logos["redux.svg"],
+      },
+      {
+        name: "Bootstrap",
+        logo: logos["bootstrap.svg"],
+      },
+    ],
+  },
+  {
+    title: "Backend",
+    skills: [
+      { name: "Nodejs", logo: logos["nodejs.svg"] },
+      { name: "MongoDB", logo: logos["mongodb.svg"] },
+      { name: "Firebase", logo: logos["firebase.svg"] },
+      { name: "Socket.io", logo: logos["socket.svg"] },
+      { name: "Express", logo: logos["express.svg"] },
+      { name: "Postgresql", logo: logos["postgresql.svg"] },
+    ],
+  },
+  {
+    title: "Technologies",
+    skills: [
+      {
+        name: "Git",
+        logo: logos["git.svg"],
+      },
+      { name: "VS Code", logo: logos["vscode.svg"] },
+      { name: "Postman", logo: logos["postman.svg"] },
+      { name: "Github", logo: logos["github.svg"] },
+      { name: "Wordpress", logo: logos["wordpress.svg"] },
+    ],
+  },
+  {
+    title: "Learning",
+    skills: [
+      { name: "Next.js", logo: logos["nextjs.svg"] },
+      { name: "Typescript", logo: logos["typescript.svg"] },
+      { name: "Docker", logo: logos["docker.svg"] },
+    ],
+  },
+];
+//Skills
+
+//Experience
+export const experiences = [
+  {
+    title: "Wordpres Developer",
+    company_name: "Freelance",
+    icon: logos["wordpress.svg"],
+    iconBg: "#fff",
+    date: "Aug 2024 - Present",
+    points: [
+      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+  {
+    title: "Full Stack Developer",
+    company_name: "Personal Projects",
+    icon:  logos["code.svg"],
+    iconBg: "#E6DEDD",
+    date: "Dec 2022 - Present",
+    points: [
+      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+];
+//Projects
+export const projects = [
+  {
+    title: "Warup",
+    category: ["Fullstack", "Backend", "Frontend"],
+    description:
+      "Real-time chat application with user authentication and message storage",
+    image: "/projects/warup.webp",
+    stack: [
+      "Reactjs",
+      "TailwindCSS",
+      "Zutsand",
+      "DaysiUi",
+      "Nodejs",
+      "Express",
+      "MongoDB",
+      "Socket.io",
+      
+    ],
+    link:"https://chat-app-1-xsfr.onrender.com/login",
+    github:"https://github.com/NicoEspin/Chat-App"
+  },
+  {
+    title: "Admin Dashboard",
+    category: "Frontend",
+    description: "Admin Dashboard with Charts",
+    image: "/projects/dashboard2.webp",
+    stack: ["Reactjs", "TailwindCSS", "Recharts", "Vercel", "Framer Motion"],
+    link:"https://admin-dashboard-2hf2.vercel.app/",
+    github:"https://github.com/NicoEspin/Admin-Dashboard"
+  },
+  {
+    title: "VirtualR",
+    category: "Frontend",
+    description: "Landing Page",
+    image: "/projects/virtualr.webp",
+    stack: ["Reactjs", "TailwindCSS", "Firebase(Deploy)"],
+    link:"https://virtualr-62845.web.app/",
+    github:"https://github.com/NicoEspin/VirtualR"
+  },
+  {
+    title: "PortfolioAC",
+    category: "Frontend",
+    description: "Freelance job: Portfolio for a graphic designer",
+    image: "/projects/antto-port.webp",
+    stack: [
+      "Reactjs",
+      "Tailwind",
+      "NextUI",
+      "Framer Motion",
+      "Firebase(Deploy)",
+    ],
+    link:"https://portfolio-ac-1c027.web.app/",
+    github:"https://github.com/NicoEspin/PortfolioAC"
+  },
+
+  {
+    title: "E-commerce",
+    category: "Frontend",
+    description: "E-commerce web App",
+    image: "/projects/ecommerce-react.webp",
+    stack: ["Reactjs", "Firebase", "CSS", "MaterialUI"],
+    link:"https://ecommerce-6899c.web.app/",
+    github:"https://github.com/NicoEspin/reactFinal"
+  },
+  {
+    title: "Game List App",
+    category: "Frontend",
+    description: "Game list Web App using RAWG API",
+    image: "/projects/gamelist.webp",
+    stack: ["Reactjs", "RAWG API", "TailwindCSS", "Axios"],
+    link:"https://game-list-app-8d0d2.web.app/",
+    github:"https://github.com/NicoEspin/GameListApp"
+  },
+];
+
+//Projects
