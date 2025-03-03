@@ -115,23 +115,23 @@ export const experiences = [
     iconBg: "#fff",
     date: "Aug 2024 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "I have created and optimized multiple custom websites for various clients, ensuring they meet specific requirements and expectations regarding design and functionality.",
+      "I provided ongoing support and tailored solutions for technical issues, ensuring my clients' websites run smoothly without interruptions.",
+      "I advised my clients on the best use of WordPress and related tools, helping them make informed decisions about their web projects.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
     ],
   },
   {
     title: "Full Stack Developer",
     company_name: "Personal Projects",
-    icon:  logos["code.svg"],
+    icon: logos["code.svg"],
     iconBg: "#E6DEDD",
     date: "Dec 2022 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "I designed and developed web applications from scratch using the MERN stack (MongoDB, Express.js, React.js, Node.js), ensuring clean and scalable code.",
+      "I identified and resolved technical issues, providing continuous support to ensure the proper functioning of the applications.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "I efficiently managed my projects, following best practices within my knowledge, optimizing application performance, and successfully deploying them to production.",
     ],
   },
 ];
@@ -152,10 +152,9 @@ export const projects = [
       "Express",
       "MongoDB",
       "Socket.io",
-      
     ],
-    link:"https://chat-app-1-xsfr.onrender.com/login",
-    github:"https://github.com/NicoEspin/Chat-App"
+    link: "https://chat-app-1-xsfr.onrender.com/login",
+    github: "https://github.com/NicoEspin/Chat-App",
   },
   {
     title: "Admin Dashboard",
@@ -163,8 +162,8 @@ export const projects = [
     description: "Admin Dashboard with Charts",
     image: "/projects/dashboard2.webp",
     stack: ["Reactjs", "TailwindCSS", "Recharts", "Vercel", "Framer Motion"],
-    link:"https://admin-dashboard-2hf2.vercel.app/",
-    github:"https://github.com/NicoEspin/Admin-Dashboard"
+    link: "https://admin-dashboard-2hf2.vercel.app/",
+    github: "https://github.com/NicoEspin/Admin-Dashboard",
   },
   {
     title: "VirtualR",
@@ -172,8 +171,8 @@ export const projects = [
     description: "Landing Page",
     image: "/projects/virtualr.webp",
     stack: ["Reactjs", "TailwindCSS", "Firebase(Deploy)"],
-    link:"https://virtualr-62845.web.app/",
-    github:"https://github.com/NicoEspin/VirtualR"
+    link: "https://virtualr-62845.web.app/",
+    github: "https://github.com/NicoEspin/VirtualR",
   },
   {
     title: "PortfolioAC",
@@ -187,8 +186,8 @@ export const projects = [
       "Framer Motion",
       "Firebase(Deploy)",
     ],
-    link:"https://portfolio-ac-1c027.web.app/",
-    github:"https://github.com/NicoEspin/PortfolioAC"
+    link: "https://portfolio-ac-1c027.web.app/",
+    github: "https://github.com/NicoEspin/PortfolioAC",
   },
 
   {
@@ -197,8 +196,8 @@ export const projects = [
     description: "E-commerce web App",
     image: "/projects/ecommerce-react.webp",
     stack: ["Reactjs", "Firebase", "CSS", "MaterialUI"],
-    link:"https://ecommerce-6899c.web.app/",
-    github:"https://github.com/NicoEspin/reactFinal"
+    link: "https://ecommerce-6899c.web.app/",
+    github: "https://github.com/NicoEspin/reactFinal",
   },
   {
     title: "Game List App",
@@ -206,8 +205,8 @@ export const projects = [
     description: "Game list Web App using RAWG API",
     image: "/projects/gamelist.webp",
     stack: ["Reactjs", "RAWG API", "TailwindCSS", "Axios"],
-    link:"https://game-list-app-8d0d2.web.app/",
-    github:"https://github.com/NicoEspin/GameListApp"
+    link: "https://game-list-app-8d0d2.web.app/",
+    github: "https://github.com/NicoEspin/GameListApp",
   },
 ];
 
