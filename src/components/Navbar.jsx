@@ -13,7 +13,7 @@ export const Navbar = () => {
 
 const tabItems = [
   { href: "hero", label: "About" },
-  { href: "skills", label: "Stack" },
+  { href: "skills", label: "Skills" },
   { href: "experience", label: "Experience" },
   { href: "projects", label: "Projects" },
   { href: "contact", label: "Contact" }

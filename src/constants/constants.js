@@ -1,9 +1,11 @@
 //importar dinamicamente los logos
+
 const importAllLogos = import.meta.glob("../assets/icons/*.svg", {
   eager: true,
   query: "?url",
   import: "default",
 });
+
 export const logos = Object.keys(importAllLogos).reduce((acc, path) => {
   const fileName = path.replace("../assets/icons/", "");
   acc[fileName] = importAllLogos[path];
@@ -69,6 +71,10 @@ export const skills = [
         name: "Bootstrap",
         logo: logos["bootstrap.svg"],
       },
+      {
+        name: "Axios",
+        logo: logos["axios.svg"],
+      },
     ],
   },
   {
@@ -93,6 +99,7 @@ export const skills = [
       { name: "Postman", logo: logos["postman.svg"] },
       { name: "Github", logo: logos["github.svg"] },
       { name: "Wordpress", logo: logos["wordpress.svg"] },
+      { name: "Bubble.io", logo: logos["bubble.svg"] },
     ],
   },
   {

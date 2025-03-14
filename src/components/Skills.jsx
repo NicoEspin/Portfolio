@@ -22,7 +22,7 @@ const Skills = () => {
               variants={fadeIn("right", "spring", index * 0.5, 0.75)}
               className="bg-gray-800 p-4 rounded-lg shadow-card-shadow flex flex-col items-center justify-between  
               min-h-[350px]  md:min-h-[450px] 
-             border border-gray-700 bg-opacity-90 "
+             border border-gray-700  "
             >
               <h2 className="mb-4 text-xl font-bold text-center text-white">
                 {category.title}
@@ -38,8 +38,9 @@ const Skills = () => {
                         src={skill.logo}
                         alt={skill.name}
                         className="size-8 md:size-11 mb-2"
+                        loading="lazy"
                       />
-                      <span className="text-sm text-center text-text1 opacity-80">
+                      <span className="text-sm text-center text-text1">
                         {skill.name}
                       </span>
                     </div>
