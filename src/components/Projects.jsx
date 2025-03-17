@@ -41,7 +41,6 @@ const Projects = () => {
             style={{
               backgroundImage: `url(${project.image})`,
             }}
-            whileHover={{ scale: 1.05 }} 
           >
             {/* Borde animado */}
             <motion.div
@@ -53,7 +52,7 @@ const Projects = () => {
                   "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                 maskComposite: "exclude",
                 WebkitMaskComposite: "xor",
-                padding: "3px", // Grosor del borde sutil
+                padding: "3px", // Grosor del borde
               }}
             />
 
