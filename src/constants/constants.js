@@ -56,6 +56,10 @@ export const skills = [
         logo: logos["js.svg"],
       },
       {
+        name: "Typescript",
+        logo: logos["typescript.svg"],
+      },
+      {
         name: "CSS",
         logo: logos["css.svg"],
       },
@@ -106,8 +110,8 @@ export const skills = [
     title: "Learning",
     skills: [
       { name: "Next.js", logo: logos["nextjs.svg"] },
-      { name: "Typescript", logo: logos["typescript.svg"] },
       { name: "Docker", logo: logos["docker.svg"] },
+      { name: "AWS", logo: logos["aws.svg"] },
     ],
   },
 ];
