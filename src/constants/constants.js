@@ -124,12 +124,27 @@ export const experiences = [
     company_name: "Freelance",
     icon: logos["wordpress.svg"],
     iconBg: "#fff",
-    date: "Aug 2024 - Present",
+    date: "Aug 2024 - Feb 2025",
     points: [
       "I have created and optimized multiple custom websites for various clients, ensuring they meet specific requirements and expectations regarding design and functionality.",
       "I provided ongoing support and tailored solutions for technical issues, ensuring my clients' websites run smoothly without interruptions.",
       "I advised my clients on the best use of WordPress and related tools, helping them make informed decisions about their web projects.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
+    ],
+  },
+  {
+    title: "Bubble.io Developer",
+    company_name: "WeHunter",
+    icon: logos["bubble.svg"],
+    iconBg: "#bbb3f2",
+    date: "Feb 2025 - may 2025",
+    points: [
+      "Collaborated in the development of an MVP using Bubble.io (low-code platform), working in an agile team to implement optimizations and iterative improvements that enhanced platform performance.",
+      "Database Design: Built and structured the database schema, creating tables, defining relationships, and ensuring data integrity for scalability",
+      "API Integrations: Integrated third-party APIs (e.g., country/country-code lookup services) and implemented custom workflows for real-time data validation in both frontend (forms, dynamic UI) and backend (business logic, error handling).",
+      "Backend-Frontend Connectivity: Developed seamless data flows between frontend and backend, enabling dynamic features such as conditional UI elements, filters, and user input validations.",
+      "UI/UX Development: Translated Figma designs into fully functional Bubble.io interfaces, ensuring responsive layouts, accessibility, and a smooth user experience.",
+      "Quality Assurance: Conducted testing (unit, integration) to validate API reliability, data consistency, and error-free form submissions."
     ],
   },
   {

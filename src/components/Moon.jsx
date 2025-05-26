@@ -41,7 +41,7 @@ const Moon = () => {
         camera={{ near: 0.1, far: 200, fov: 45, position: [-4, 3, 6] }}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <Suspense fallback={<CanvasLoader />}>
+        
           <PresentationControls
             enableZoom={false}
             maxPolarAngle={Math.PI / 2}
@@ -53,7 +53,7 @@ const Moon = () => {
               <MoonModel />
             </Stage>
           </PresentationControls>
-        </Suspense>
+       
       </Canvas>
     </div>
   );
