@@ -59,6 +59,7 @@ export const skills = [
         name: "Typescript",
         logo: logos["typescript.svg"],
       },
+      { name: "Next.js", logo: logos["nextjs.svg"] },
       {
         name: "CSS",
         logo: logos["css.svg"],
@@ -71,10 +72,7 @@ export const skills = [
         name: "Redux",
         logo: logos["redux.svg"],
       },
-      {
-        name: "Bootstrap",
-        logo: logos["bootstrap.svg"],
-      },
+
       {
         name: "Axios",
         logo: logos["axios.svg"],
@@ -109,9 +107,9 @@ export const skills = [
   {
     title: "Learning",
     skills: [
-      { name: "Next.js", logo: logos["nextjs.svg"] },
       { name: "Docker", logo: logos["docker.svg"] },
       { name: "AWS", logo: logos["aws.svg"] },
+      { name: "n8n", logo: logos["n8n.svg"] },
     ],
   },
 ];
@@ -144,7 +142,7 @@ export const experiences = [
       "API Integrations: Integrated third-party APIs (e.g., country/country-code lookup services) and implemented custom workflows for real-time data validation in both frontend (forms, dynamic UI) and backend (business logic, error handling).",
       "Backend-Frontend Connectivity: Developed seamless data flows between frontend and backend, enabling dynamic features such as conditional UI elements, filters, and user input validations.",
       "UI/UX Development: Translated Figma designs into fully functional Bubble.io interfaces, ensuring responsive layouts, accessibility, and a smooth user experience.",
-      "Quality Assurance: Conducted testing (unit, integration) to validate API reliability, data consistency, and error-free form submissions."
+      "Quality Assurance: Conducted testing (unit, integration) to validate API reliability, data consistency, and error-free form submissions.",
     ],
   },
   {
