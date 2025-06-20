@@ -181,10 +181,19 @@ export const projects = [
     github: "https://github.com/NicoEspin/Chat-App",
   },
   {
+    title: "Synttek",
+    category: "Frontend",
+    description: "Modern Landing Page for a web development Agency",
+    image: "/projects/synttek.webp",
+    stack: ["Reactjs", "Next.js", "Next-intl", "TailwindCSS", "Framer Motion"],
+    link: "https://syntek-phi.vercel.app/es",
+    github: "https://github.com/NicoEspin/Syntek",
+  },
+  {
     title: "Admin Dashboard",
     category: "Frontend",
     description: "Admin Dashboard with Charts",
-    image: "/projects/dashboard2.webp",
+    image: "/projects/dashboard.webp",
     stack: ["Reactjs", "TailwindCSS", "Recharts", "Vercel", "Framer Motion"],
     link: "https://admin-dashboard-2hf2.vercel.app/",
     github: "https://github.com/NicoEspin/Admin-Dashboard",
@@ -222,15 +231,6 @@ export const projects = [
     stack: ["Reactjs", "Firebase", "CSS", "MaterialUI"],
     link: "https://ecommerce-6899c.web.app/",
     github: "https://github.com/NicoEspin/reactFinal",
-  },
-  {
-    title: "Game List App",
-    category: "Frontend",
-    description: "Game list Web App using RAWG API",
-    image: "/projects/gamelist.webp",
-    stack: ["Reactjs", "RAWG API", "TailwindCSS", "Axios"],
-    link: "https://game-list-app-8d0d2.web.app/",
-    github: "https://github.com/NicoEspin/GameListApp",
   },
 ];
 
