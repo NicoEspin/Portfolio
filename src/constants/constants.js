@@ -1,16 +1,19 @@
 //importar dinamicamente los logos
 
-const importAllLogos = import.meta.glob("../assets/icons/*.svg", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
-
-export const logos = Object.keys(importAllLogos).reduce((acc, path) => {
-  const fileName = path.replace("../assets/icons/", "");
-  acc[fileName] = importAllLogos[path];
-  return acc;
-}, {});
+const importAllLogos = import.meta.glob(
+  "../assets/icons/*.{svg,png,webp,jpg,jpeg,gif}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  }
+);
+export const logos = Object.fromEntries(
+  Object.entries(importAllLogos).map(([path, url]) => {
+    const fileName = path.split("/").pop(); // más robusto que replace
+    return [fileName, url];
+  })
+);
 
 //NAV
 export const navItems = [
@@ -118,6 +121,34 @@ export const skills = [
 //Experience
 export const experiences = [
   {
+    title: "Full Stack Developer",
+    company_name: "Andeshire",
+    icon: logos["logo-andes.webp"],
+    iconBg: "#bbb3f2",
+    date: "Jan 2025 - Present",
+    points: [
+      "Led a full front-end migration from Django Templates to Next.js (TypeScript) + Redux, defining the architecture, patterns, and conventions of the new stack. ",
+      "Designed and built a design system and component architecture (600+ components), with global state in Redux organized by features and slices. ",
+      " Implemented performance optimizations (lazy loading, selective memoization, bundle/code splitting, and selector audits) that reduced load times and improved perceived speed. ",
+      "Developed and orchestrated AI agents to automate recruiting workflows (content generation, analysis, and automated actions), integrating them with existing services. ",
+      "Collaborated on the Django (Python) backend to expose secure, high-performance endpoints,standardizing API contracts and handling front-end data serialization/normalization. ",
+      "Stablished quality practices: robust state management, error handling, reusable hooks, and PR/code conventions to scale team development. ",
+    ],
+  },
+  {
+    title: "Full Stack Developer",
+    company_name: "Personal Projects",
+    icon: logos["code.svg"],
+    iconBg: "#E6DEDD",
+    date: "Dec 2022 - Present",
+    points: [
+      "I designed and developed web applications from scratch using the MERN stack (MongoDB, Express.js, React.js, Node.js), ensuring clean and scalable code.",
+      "I identified and resolved technical issues, providing continuous support to ensure the proper functioning of the applications.",
+      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "I efficiently managed my projects, following best practices within my knowledge, optimizing application performance, and successfully deploying them to production.",
+    ],
+  },
+  {
     title: "Wordpres Developer",
     company_name: "Freelance",
     icon: logos["wordpress.svg"],
@@ -145,19 +176,6 @@ export const experiences = [
       "Quality Assurance: Conducted testing (unit, integration) to validate API reliability, data consistency, and error-free form submissions.",
     ],
   },
-  {
-    title: "Full Stack Developer",
-    company_name: "Personal Projects",
-    icon: logos["code.svg"],
-    iconBg: "#E6DEDD",
-    date: "Dec 2022 - Present",
-    points: [
-      "I designed and developed web applications from scratch using the MERN stack (MongoDB, Express.js, React.js, Node.js), ensuring clean and scalable code.",
-      "I identified and resolved technical issues, providing continuous support to ensure the proper functioning of the applications.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "I efficiently managed my projects, following best practices within my knowledge, optimizing application performance, and successfully deploying them to production.",
-    ],
-  },
 ];
 //Projects
 export const projects = [
@@ -181,6 +199,29 @@ export const projects = [
     github: "https://github.com/NicoEspin/Chat-App",
   },
   {
+    title: "Andeshire",
+    category: ["Fullstack", "Backend", "Frontend"],
+    description:
+      "ATS filter with AI to boost X10 the efficiency of the recruitment process",
+    image: "/projects/andes-app.webp",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Redux",
+      "Next-intl",
+      "Shadcn",
+      "Django",
+      "AWS",
+      "Nest.js",
+      "PostgreSQL",
+      "Socket.io",
+      "OpenAI",
+    ],
+    link: "https://andeshire.com/",
+    github: "https://github.com/NicoEspin/Chat-App",
+  },
+  {
     title: "Synttek",
     category: "Frontend",
     description: "Modern Landing Page for a web development Agency",
@@ -188,6 +229,15 @@ export const projects = [
     stack: ["Reactjs", "Next.js", "Next-intl", "TailwindCSS", "Framer Motion"],
     link: "https://syntek-phi.vercel.app/es",
     github: "https://github.com/NicoEspin/Syntek",
+  },
+  {
+    title: "Portfolio for Designer",
+    category: "Frontend",
+    description: "Portfolio for Graphic Designer",
+    image: "/projects/portfolio-ac.webp",
+    stack: ["Next.js", "Vercel", "TailwindCSS", "Framer motion", "HeroUi"],
+    link: "https://anttonella-catalano.vercel.app/",
+    github: "https://github.com/NicoEspin/ACportfolio",
   },
   {
     title: "Admin Dashboard",
@@ -206,31 +256,6 @@ export const projects = [
     stack: ["Reactjs", "TailwindCSS", "Firebase(Deploy)"],
     link: "https://virtualr-62845.web.app/",
     github: "https://github.com/NicoEspin/VirtualR",
-  },
-  {
-    title: "PortfolioAC",
-    category: "Frontend",
-    description: "Freelance job: Portfolio for a graphic designer",
-    image: "/projects/antto-port.webp",
-    stack: [
-      "Reactjs",
-      "Tailwind",
-      "NextUI",
-      "Framer Motion",
-      "Firebase(Deploy)",
-    ],
-    link: "https://portfolio-ac-1c027.web.app/",
-    github: "https://github.com/NicoEspin/PortfolioAC",
-  },
-
-  {
-    title: "E-commerce",
-    category: "Frontend",
-    description: "E-commerce web App",
-    image: "/projects/ecommerce-react.webp",
-    stack: ["Reactjs", "Firebase", "CSS", "MaterialUI"],
-    link: "https://ecommerce-6899c.web.app/",
-    github: "https://github.com/NicoEspin/reactFinal",
   },
 ];
 
