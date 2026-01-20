@@ -6,12 +6,14 @@ import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { ChatWidget } from "./components/ChatWidget";
 
 function App() {
   return (
     <div className="overflow-hidden">
       <StarsCanvas />
       <Navbar />
+      <ChatWidget />
       <Hero />
       <Skills />
       <Experience />

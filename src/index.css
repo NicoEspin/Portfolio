@@ -14,3 +14,30 @@
 }
 
   
+/* Scrollbar del chat (Coquito) */
+.coquito-scroll {
+  scrollbar-gutter: stable;         /* reserva espacio, evita layout shift */
+  overscroll-behavior: contain;     /* evita que scrollee el body al llegar al final */
+  scrollbar-width: thin;            /* Firefox */
+  scrollbar-color: rgba(255,255,255,0.28) transparent; /* Firefox */
+}
+
+/* Chrome / Edge / Safari */
+.coquito-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.coquito-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.coquito-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  border: 3px solid transparent; /* hace que se vea más “finita” */
+  background-clip: padding-box;
+}
+
+.coquito-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}

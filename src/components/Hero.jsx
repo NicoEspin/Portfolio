@@ -49,7 +49,7 @@ const HeroSection = () => {
           </motion.h2>
           <motion.p 
           variants={textVariant(1.5)}
-          className="text-sm md:text-md lg:text-xl lg:max-w-xl text-text1">
+          className="text-sm md:text-md lg:text-lg lg:max-w-xl text-text1">
             {description}
           </motion.p>
           <motion.div variants={fadeIn("right", "spring", 2, 0.75)} className="flex gap-10">

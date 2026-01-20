@@ -33,7 +33,8 @@ export const roles = [
   "Bubble Developer",
 ];
 export const description =
-  "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning, I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.";
+  "I’m a Full Stack Developer with 2+ years of experience, with a strong focus on Front-End using React/Next.js, I led the migration of the front-end from Django Templates to Next.js + TypeScript + Redux, defining the architecture, patterns, and conventions for the new stack; I enjoy building scalable, high-performance products, having designed a robust design system and worked on optimizations and I also contributed to the development and orchestration of AI agents integrated into real recruiting workflows; my main stack includes Next.js, React, TypeScript, Redux Toolkit, TailwindCSS, Node.js/Nest.js, Express, MongoDB, PostgreSQL."
+
 export const resumeLink =
   "https://docs.google.com/document/d/1iLgZIBS7QwWeZ5vD7CncYoO3VJ0BKyYp/edit";
 
