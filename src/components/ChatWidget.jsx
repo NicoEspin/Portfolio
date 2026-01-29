@@ -5,6 +5,41 @@ import { Bot, X, Send } from "lucide-react";
 /**
  * Helpers: URLs + rendering + preview
  */
+
+const TECH_TLDS = new Set([
+  "js",
+  "ts",
+  "jsx",
+  "tsx",
+  "json",
+  "md",
+  "css",
+  "html",
+  "htm",
+]);
+
+function isProbablyUrlToken(rawHit, prevChar = "") {
+  const s = String(rawHit || "").trim();
+
+  // evita linkear dominios dentro de emails: "nico@andeshire.com"
+  if (prevChar === "@") return false;
+
+  // con scheme / www => sí
+  if (/^https?:\/\//i.test(s) || /^www\./i.test(s)) return true;
+
+  // bare domain
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}([/?#]|$)/i.test(s)) return false;
+
+  const host = s.split(/[/?#]/)[0];
+  const tld = (host.split(".").pop() || "").toLowerCase();
+  const hasPath = /[/?#]/.test(s);
+
+  // next.js, node.js, etc => NO linkear si no hay path
+  if (TECH_TLDS.has(tld) && !hasPath) return false;
+
+  return true;
+}
+
 const API_BASE = (
   import.meta.env.VITE_COQUITO_API_BASE ||
   "https://chatbot-portfolio-red.vercel.app"
@@ -52,25 +87,51 @@ function stripTrailingPunctuation(url) {
   return normalizeUrl(url);
 }
 
+function getHost(url) {
+  try {
+    return new URL(url).host.replace(/^www\./i, "").toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+function pickPreviewUrls(urls, limit = 2) {
+  const picked = [];
+  const seenHosts = new Set();
+
+  for (const u of urls) {
+    const href = normalizeUrl(u);
+    const host = getHost(href) || href;
+
+    if (seenHosts.has(host)) continue;
+    seenHosts.add(host);
+
+    picked.push(href);
+    if (picked.length >= limit) break;
+  }
+
+  return picked;
+}
 function extractUrls(content) {
   const text = String(content || "");
   const urls = new Set();
 
-  // markdown: [text](https://...)
   const mdRe = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
   let m;
   while ((m = mdRe.exec(text)) !== null) {
     urls.add(normalizeUrl(m[2]));
   }
 
-  // raw: https://..., www..., github.com/...
-  // (avoid capturing ')' '>' '"' ']' etc as part of the link)
   const rawRe =
     /(?:https?:\/\/|www\.)[^\s)<>"'\]]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s)<>"'\]]*)?/gi;
 
   while ((m = rawRe.exec(text)) !== null) {
     const hit = (m[0] || "").trim();
     if (!hit || hit.length < 4) continue;
+
+    const prevChar = m.index > 0 ? text[m.index - 1] : "";
+    if (!isProbablyUrlToken(hit, prevChar)) continue;
+
     urls.add(normalizeUrl(hit));
   }
 
@@ -79,80 +140,97 @@ function extractUrls(content) {
 
 function MessageContent({ content }) {
   const text = String(content || "");
-  const nodes = [];
-  let i = 0;
 
-  const mdRe = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  const mdLinkRe = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  const boldRe = /\*\*([^*]+?)\*\*/g;
 
   // raw: https://..., www..., github.com/...
-  const rawRe =
+  const rawUrlRe =
     /(?:https?:\/\/|www\.)[^\s)<>"'\]]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s)<>"'\]]*)?/gi;
 
-  while (i < text.length) {
-    mdRe.lastIndex = i;
-    rawRe.lastIndex = i;
+  const renderInline = (lineText, keyBase) => {
+    const nodes = [];
+    let i = 0;
 
-    const mdMatch = mdRe.exec(text);
-    const rawMatch = rawRe.exec(text);
+    while (i < lineText.length) {
+      mdLinkRe.lastIndex = i;
+      rawUrlRe.lastIndex = i;
+      boldRe.lastIndex = i;
 
-    const next = (() => {
-      if (!mdMatch && !rawMatch) return null;
-      if (mdMatch && rawMatch) {
-        return mdMatch.index <= rawMatch.index
-          ? { type: "md", match: mdMatch }
-          : { type: "raw", match: rawMatch };
+      const mdMatch = mdLinkRe.exec(lineText);
+      const rawMatch = rawUrlRe.exec(lineText);
+      const boldMatch = boldRe.exec(lineText);
+
+      const next = (() => {
+        const candidates = [
+          mdMatch ? { type: "md", match: mdMatch } : null,
+          rawMatch ? { type: "raw", match: rawMatch } : null,
+          boldMatch ? { type: "bold", match: boldMatch } : null,
+        ].filter(Boolean);
+
+        if (!candidates.length) return null;
+
+        candidates.sort((a, b) => a.match.index - b.match.index);
+        return candidates[0];
+      })();
+
+      if (!next) {
+        nodes.push(lineText.slice(i));
+        break;
       }
-      if (mdMatch) return { type: "md", match: mdMatch };
-      return { type: "raw", match: rawMatch };
-    })();
 
-    if (!next) {
-      nodes.push(text.slice(i));
-      break;
-    }
+      const start = next.match.index;
+      if (start > i) nodes.push(lineText.slice(i, start));
 
-    const start = next.match.index;
-    if (start > i) nodes.push(text.slice(i, start));
+      if (next.type === "bold") {
+        const inner = next.match[1] || "";
+        nodes.push(
+          <strong key={`${keyBase}-b-${start}`} className="font-semibold">
+            {inner}
+          </strong>,
+        );
+        i = start + next.match[0].length;
+        continue;
+      }
 
-    if (next.type === "md") {
-      const label = next.match[1];
-      const href = normalizeUrl(next.match[2]);
-      const display =
-        label && label.trim() ? label : safeDecodeUrlForDisplay(href);
+      if (next.type === "md") {
+        const label = next.match[1];
+        const href = normalizeUrl(next.match[2]);
+        const display =
+          label && label.trim() ? label : safeDecodeUrlForDisplay(href);
 
-      nodes.push(
-        <a
-          key={`md-${start}-${href}`}
-          href={href}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="underline text-primary1 hover:opacity-80 break-all"
-        >
-          {display}
-        </a>,
-      );
+        nodes.push(
+          <a
+            key={`${keyBase}-md-${start}-${href}`}
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="underline text-primary1 hover:opacity-80 break-all"
+          >
+            {display}
+          </a>,
+        );
 
-      i = start + next.match[0].length;
-    } else {
+        i = start + next.match[0].length;
+        continue;
+      }
+
+      // raw url
       const rawHit = next.match[0] || "";
+      const prevChar = start > 0 ? lineText[start - 1] : "";
 
-      const href = stripTrailingPunctuation(rawHit);
-      const looksLikeUrl =
-        /^https?:\/\//i.test(href) ||
-        /^www\./i.test(href) ||
-        /^[a-z0-9.-]+\.[a-z]{2,}(\/|$)/i.test(href);
-
-      if (!looksLikeUrl) {
+      if (!isProbablyUrlToken(rawHit, prevChar)) {
         nodes.push(rawHit);
         i = start + rawHit.length;
         continue;
       }
 
+      const href = stripTrailingPunctuation(rawHit);
       const display = safeDecodeUrlForDisplay(href);
 
       nodes.push(
         <a
-          key={`raw-${start}-${href}`}
+          key={`${keyBase}-raw-${start}-${href}`}
           href={href}
           target="_blank"
           rel="noreferrer noopener"
@@ -164,9 +242,69 @@ function MessageContent({ content }) {
 
       i = start + rawHit.length;
     }
+
+    return nodes;
+  };
+
+  const lines = text.split(/\r?\n/);
+  const blocks = [];
+  let idx = 0;
+  let blockId = 0;
+
+  while (idx < lines.length) {
+    // blanks => separador
+    if (!lines[idx].trim()) {
+      blocks.push(<div key={`sp-${blockId++}`} className="h-2" />);
+      idx++;
+      continue;
+    }
+
+    // bullets: "- "
+    if (/^\s*-\s+/.test(lines[idx])) {
+      const items = [];
+      while (idx < lines.length && /^\s*-\s+/.test(lines[idx])) {
+        items.push(lines[idx].replace(/^\s*-\s+/, ""));
+        idx++;
+      }
+
+      blocks.push(
+        <ul key={`ul-${blockId++}`} className="list-disc pl-5 space-y-1">
+          {items.map((it, i2) => (
+            <li key={`li-${blockId}-${i2}`}>
+              {renderInline(it, `li-${blockId}-${i2}`)}
+            </li>
+          ))}
+        </ul>,
+      );
+      continue;
+    }
+
+    // párrafo normal hasta blank o bullets
+    const paraLines = [];
+    while (
+      idx < lines.length &&
+      lines[idx].trim() &&
+      !/^\s*-\s+/.test(lines[idx])
+    ) {
+      paraLines.push(lines[idx]);
+      idx++;
+    }
+
+    const paraNodes = [];
+    paraLines.forEach((ln, i2) => {
+      paraNodes.push(...renderInline(ln, `p-${blockId}-${i2}`));
+      if (i2 < paraLines.length - 1)
+        paraNodes.push(<br key={`br-${blockId}-${i2}`} />);
+    });
+
+    blocks.push(
+      <p key={`p-${blockId++}`} className="whitespace-pre-wrap">
+        {paraNodes}
+      </p>,
+    );
   }
 
-  return <>{nodes}</>;
+  return <div className="space-y-2">{blocks}</div>;
 }
 
 function LinkPreview({ url }) {
@@ -446,7 +584,11 @@ export function ChatWidget() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.98 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
-          className="fixed bottom-4 right-4 z-50 w-[360px] h-[520px] rounded-2xl bg-background1 bg-opacity-90 shadow-md overflow-hidden flex flex-col border border-primary1/20"
+          className="fixed bottom-4 right-4 z-50
+                      w-[min(480px,calc(100vw-2rem))]
+                      h-[min(620px,calc(100vh-2rem))]
+                      rounded-2xl bg-background1 bg-opacity-90 shadow-md overflow-hidden flex flex-col
+                      border border-primary1/20"
         >
           {/* Header */}
           <div className="px-4 py-3 flex items-center justify-between border-b border-primary1/20">
@@ -478,15 +620,26 @@ export function ChatWidget() {
               const isUser = m.role === "user";
               const isStreaming =
                 !isUser && loading && idx === messages.length - 1;
-
               const urls = !isUser ? extractUrls(m.content || "") : [];
-              const firstUrl = urls[0] ? normalizeUrl(urls[0]) : null;
+              const previewUrls = !isUser ? pickPreviewUrls(urls, 2) : [];
+
+              const prev = idx > 0 ? messages[idx - 1] : null;
+              const prevUrls =
+                prev && prev.role !== "user"
+                  ? extractUrls(prev.content || "")
+                  : [];
+              const prevPreviewUrls = prev ? pickPreviewUrls(prevUrls, 2) : [];
+
+              // evita repetir previews si el mensaje anterior ya los mostró
+              const uniquePreviewUrls = previewUrls.filter(
+                (u) => !prevPreviewUrls.includes(u),
+              );
 
               return (
                 <div
                   key={idx}
                   className={[
-                    "max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap border",
+                    "max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed border",
                     isUser
                       ? "ml-auto bg-background3 text-white border-primary1/30"
                       : "bg-background3/70 text-white border-white/10",
@@ -498,8 +651,12 @@ export function ChatWidget() {
                     <span className="text-text2">Typing…</span>
                   ) : null}
 
-                  {!isUser && !isStreaming && firstUrl ? (
-                    <LinkPreview url={firstUrl} />
+                  {!isUser && !isStreaming && uniquePreviewUrls.length > 0 ? (
+                    <div className="mt-2 space-y-2">
+                      {uniquePreviewUrls.map((u) => (
+                        <LinkPreview key={u} url={u} />
+                      ))}
+                    </div>
                   ) : null}
                 </div>
               );
