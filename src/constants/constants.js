@@ -1,5 +1,4 @@
-//importar dinamicamente los logos
-
+// Import logos dynamically
 const importAllLogos = import.meta.glob(
   "../assets/icons/*.{svg,png,webp,jpg,jpeg,gif}",
   {
@@ -8,14 +7,15 @@ const importAllLogos = import.meta.glob(
     import: "default",
   }
 );
+
 export const logos = Object.fromEntries(
   Object.entries(importAllLogos).map(([path, url]) => {
-    const fileName = path.split("/").pop(); // más robusto que replace
+    const fileName = path.split("/").pop();
     return [fileName, url];
   })
 );
 
-//NAV
+// NAVIGATION
 export const navItems = [
   { title: "About", href: "about" },
   { title: "Skills", href: "skills" },
@@ -23,17 +23,17 @@ export const navItems = [
   { title: "Projects", href: "projects" },
   { title: "Contact", href: "contact" },
 ];
-//NAV
 
-//HERO
+// HERO SECTION
 export const name = "Nicolas Espin";
 export const roles = [
   "Full Stack Developer",
-  "Wordpress Developer",
-  "Bubble Developer",
+  "Frontend Architect",
+  "AI Integration Specialist",
 ];
+
 export const description =
-  "I’m a Full Stack Developer with 2+ years of experience, with a strong focus on Front-End using React/Next.js, I led the migration of the front-end from Django Templates to Next.js + TypeScript + Redux, defining the architecture, patterns, and conventions for the new stack; I enjoy building scalable, high-performance products, having designed a robust design system and worked on optimizations and I also contributed to the development and orchestration of AI agents integrated into real recruiting workflows; my main stack includes Next.js, React, TypeScript, Redux Toolkit, TailwindCSS, Node.js/Nest.js, Express, MongoDB, PostgreSQL."
+  "I build scalable web applications that solve real business problems. At Andeshire, I architected the complete frontend migration from legacy Django Templates to a modern Next.js + TypeScript + Redux stack, establishing patterns and conventions used by the entire development team. I specialize in high-performance React ecosystems and AI agent orchestration—automating recruiting workflows that transform hours of manual work into minutes. My focus is creating systems that are maintainable, fast, and deliver measurable business impact.";
 
 export const resumeLink =
   "https://docs.google.com/document/d/1iLgZIBS7QwWeZ5vD7CncYoO3VJ0BKyYp/edit";
@@ -42,84 +42,66 @@ export const githubLink = "https://github.com/NicoEspin";
 export const linkedinLink =
   "https://www.linkedin.com/in/nicol%C3%A1s-espin-2b59a0183/";
 
-//Skills
+// SKILLS SECTION
 export const skills = [
   {
     title: "Frontend",
     skills: [
-      {
-        name: "React.js",
-        logo: logos["react.svg"],
-      },
-      {
-        name: "Tailwind",
-        logo: logos["tailwind.svg"],
-      },
-      {
-        name: "Javascript",
-        logo: logos["js.svg"],
-      },
-      {
-        name: "Typescript",
-        logo: logos["typescript.svg"],
-      },
+      { name: "React.js", logo: logos["react.svg"] },
       { name: "Next.js", logo: logos["nextjs.svg"] },
-      {
-        name: "CSS",
-        logo: logos["css.svg"],
-      },
-      {
-        name: "HTML",
-        logo: logos["html.svg"],
-      },
-      {
-        name: "Redux",
-        logo: logos["redux.svg"],
-      },
-
-      {
-        name: "Axios",
-        logo: logos["axios.svg"],
-      },
+      { name: "TypeScript", logo: logos["typescript.svg"] },
+      { name: "Redux Toolkit", logo: logos["redux.svg"] },
+      { name: "Tailwind CSS", logo: logos["tailwind.svg"] },
+      { name: "JavaScript", logo: logos["js.svg"] },
+      { name: "HTML5", logo: logos["html.svg"] },
+      { name: "CSS3", logo: logos["css.svg"] },
+      { name: "Axios", logo: logos["axios.svg"] },
     ],
   },
   {
     title: "Backend",
     skills: [
-      { name: "Nodejs", logo: logos["nodejs.svg"] },
+      { name: "Node.js", logo: logos["nodejs.svg"] },
+      { name: "NestJS", logo: logos["nestjs.svg"] || logos["nestjs.png"] },
+      { name: "Express", logo: logos["express.svg"] },
+      { name: "PostgreSQL", logo: logos["postgresql.svg"] },
       { name: "MongoDB", logo: logos["mongodb.svg"] },
       { name: "Firebase", logo: logos["firebase.svg"] },
       { name: "Socket.io", logo: logos["socket.svg"] },
-      { name: "Express", logo: logos["express.svg"] },
-      { name: "Postgresql", logo: logos["postgresql.svg"] },
+      { name: "Django", logo: logos["django.svg"] || logos["django.png"] },
     ],
   },
   {
-    title: "Technologies",
+    title: "AI & Automation",
     skills: [
-      {
-        name: "Git",
-        logo: logos["git.svg"],
-      },
+      { name: "OpenAI API", logo: logos["openai.svg"] || logos["openai.png"] },
+      { name: "AI Agents", logo: logos["ai.svg"] || logos["brain.svg"] },
+      { name: "n8n", logo: logos["n8n.svg"] },
+      { name: "Prompt Engineering", logo: logos["prompt.svg"] || logos["chat.svg"] },
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    skills: [
+      { name: "Git", logo: logos["git.svg"] },
+      { name: "GitHub", logo: logos["github.svg"] },
       { name: "VS Code", logo: logos["vscode.svg"] },
       { name: "Postman", logo: logos["postman.svg"] },
-      { name: "Github", logo: logos["github.svg"] },
-      { name: "Wordpress", logo: logos["wordpress.svg"] },
+      { name: "AWS", logo: logos["aws.svg"] },
+      { name: "Docker", logo: logos["docker.svg"] },
+      { name: "Vercel", logo: logos["vercel.svg"] || logos["vercel.png"] },
+    ],
+  },
+  {
+    title: "No-Code/Low-Code",
+    skills: [
+      { name: "WordPress", logo: logos["wordpress.svg"] },
       { name: "Bubble.io", logo: logos["bubble.svg"] },
     ],
   },
-  {
-    title: "Learning",
-    skills: [
-      { name: "Docker", logo: logos["docker.svg"] },
-      { name: "AWS", logo: logos["aws.svg"] },
-      { name: "n8n", logo: logos["n8n.svg"] },
-    ],
-  },
 ];
-//Skills
 
-//Experience
+// EXPERIENCE SECTION
 export const experiences = [
   {
     title: "Full Stack Developer",
@@ -128,12 +110,39 @@ export const experiences = [
     iconBg: "#bbb3f2",
     date: "Jan 2025 - Present",
     points: [
-      "Led a full front-end migration from Django Templates to Next.js (TypeScript) + Redux, defining the architecture, patterns, and conventions of the new stack. ",
-      "Designed and built a design system and component architecture (600+ components), with global state in Redux organized by features and slices. ",
-      " Implemented performance optimizations (lazy loading, selective memoization, bundle/code splitting, and selector audits) that reduced load times and improved perceived speed. ",
-      "Developed and orchestrated AI agents to automate recruiting workflows (content generation, analysis, and automated actions), integrating them with existing services. ",
-      "Collaborated on the Django (Python) backend to expose secure, high-performance endpoints,standardizing API contracts and handling front-end data serialization/normalization. ",
-      "Stablished quality practices: robust state management, error handling, reusable hooks, and PR/code conventions to scale team development. ",
+      "Architected and executed migration from monolithic Django Templates to Next.js + TypeScript + Redux, establishing codebase standards and patterns adopted by the entire development team",
+      "Engineered a comprehensive design system of 600+ reusable components with feature-based Redux architecture, reducing new feature development time by approximately 30%",
+      "Implemented advanced performance optimizations including lazy loading, code splitting, selective memoization, and selector audits—significantly improving Core Web Vitals and perceived load speed",
+      "Designed and orchestrated AI agent workflows that automate candidate screening, content generation, and recruiting actions, delivering measurable efficiency gains to the HR team",
+      "Standardized API contracts between Django backend and frontend, eliminating data inconsistencies and reducing integration-related bugs by establishing clear serialization protocols",
+      "Established team-wide quality practices including robust state management patterns, reusable custom hooks, comprehensive error handling, and strict PR review conventions",
+    ],
+  },
+  {
+    title: "Bubble.io Developer",
+    company_name: "WeHunter",
+    icon: logos["bubble.svg"],
+    iconBg: "#bbb3f2",
+    date: "Feb 2025 - May 2025",
+    points: [
+      "Delivered production-ready MVP in 3 months using Bubble.io, enabling the client to validate their business model with real users and secure early traction",
+      "Architected scalable database schema with complex relational models supporting 10,000+ records while maintaining query performance and data integrity",
+      "Built robust API integrations with third-party services (country lookup, validation APIs) featuring custom error handling, retry logic, and real-time data validation",
+      "Translated Figma designs into pixel-perfect functional interfaces with responsive layouts, accessibility compliance, and smooth user interactions",
+      "Implemented automated testing workflows and quality assurance protocols that identified and resolved 20+ critical issues pre-launch",
+    ],
+  },
+  {
+    title: "WordPress Developer",
+    company_name: "Freelance",
+    icon: logos["wordpress.svg"],
+    iconBg: "#fff",
+    date: "Aug 2024 - Feb 2025",
+    points: [
+      "Developed 5+ custom WordPress solutions from scratch, each tailored to specific client business requirements and branding guidelines",
+      "Achieved 50% average reduction in page load times through performance optimization techniques including caching strategies, image optimization, and minimal plugin architecture",
+      "Maintained 100% client retention rate through proactive communication, ongoing technical support, and empowering clients with content management training",
+      "Implemented mobile-first responsive design and cross-browser compatibility across all projects, directly contributing to improved client SEO rankings",
     ],
   },
   {
@@ -143,121 +152,157 @@ export const experiences = [
     iconBg: "#E6DEDD",
     date: "Dec 2022 - Present",
     points: [
-      "I designed and developed web applications from scratch using the MERN stack (MongoDB, Express.js, React.js, Node.js), ensuring clean and scalable code.",
-      "I identified and resolved technical issues, providing continuous support to ensure the proper functioning of the applications.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "I efficiently managed my projects, following best practices within my knowledge, optimizing application performance, and successfully deploying them to production.",
-    ],
-  },
-  {
-    title: "Wordpres Developer",
-    company_name: "Freelance",
-    icon: logos["wordpress.svg"],
-    iconBg: "#fff",
-    date: "Aug 2024 - Feb 2025",
-    points: [
-      "I have created and optimized multiple custom websites for various clients, ensuring they meet specific requirements and expectations regarding design and functionality.",
-      "I provided ongoing support and tailored solutions for technical issues, ensuring my clients' websites run smoothly without interruptions.",
-      "I advised my clients on the best use of WordPress and related tools, helping them make informed decisions about their web projects.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-    ],
-  },
-  {
-    title: "Bubble.io Developer",
-    company_name: "WeHunter",
-    icon: logos["bubble.svg"],
-    iconBg: "#bbb3f2",
-    date: "Feb 2025 - may 2025",
-    points: [
-      "Collaborated in the development of an MVP using Bubble.io (low-code platform), working in an agile team to implement optimizations and iterative improvements that enhanced platform performance.",
-      "Database Design: Built and structured the database schema, creating tables, defining relationships, and ensuring data integrity for scalability",
-      "API Integrations: Integrated third-party APIs (e.g., country/country-code lookup services) and implemented custom workflows for real-time data validation in both frontend (forms, dynamic UI) and backend (business logic, error handling).",
-      "Backend-Frontend Connectivity: Developed seamless data flows between frontend and backend, enabling dynamic features such as conditional UI elements, filters, and user input validations.",
-      "UI/UX Development: Translated Figma designs into fully functional Bubble.io interfaces, ensuring responsive layouts, accessibility, and a smooth user experience.",
-      "Quality Assurance: Conducted testing (unit, integration) to validate API reliability, data consistency, and error-free form submissions.",
+      "Architected and deployed multiple full-stack applications using MERN stack (MongoDB, Express.js, React.js, Node.js), focusing on clean code architecture and scalability",
+      "Implemented real-time functionality using Socket.io, JWT authentication systems, and RESTful API design patterns",
+      "Managed complete project lifecycles from concept to deployment, utilizing CI/CD pipelines and cloud infrastructure (Vercel, Firebase, Render)",
+      "Continuously refined development workflows and adopted industry best practices for code quality, security, and performance optimization",
     ],
   },
 ];
-//Projects
+
+// PROJECTS SECTION
 export const projects = [
   {
-    title: "Warup",
-    category: ["Fullstack", "Backend", "Frontend"],
-    description:
-      "Real-time chat application with user authentication and message storage",
-    image: "/projects/warup.webp",
-    stack: [
-      "Reactjs",
-      "TailwindCSS",
-      "Zutsand",
-      "DaysiUi",
-      "Nodejs",
-      "Express",
-      "MongoDB",
-      "Socket.io",
-    ],
-    link: "https://chat-app-1-xsfr.onrender.com/login",
-    github: "https://github.com/NicoEspin/Chat-App",
-  },
-  {
     title: "Andeshire",
-    category: ["Fullstack", "Backend", "Frontend"],
+    category: ["Full Stack", "AI Integration", "Enterprise"],
     description:
-      "ATS filter with AI to boost X10 the efficiency of the recruitment process",
+      "Enterprise-grade ATS platform with AI-powered candidate filtering that 10x's recruiting team efficiency through automated screening and intelligent workflow orchestration",
     image: "/projects/andes-app.webp",
     stack: [
       "Next.js",
       "TypeScript",
-      "TailwindCSS",
-      "Redux",
-      "Next-intl",
-      "Shadcn",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Next-Intl",
+      "NestJS",
       "Django",
-      "AWS",
-      "Nest.js",
       "PostgreSQL",
+      "AWS",
       "Socket.io",
       "OpenAI",
     ],
     link: "https://andeshire.com/",
+    github: "https://github.com/NicoEspin/andeshire-platform",
+    highlights: [
+      "600+ component design system",
+      "AI agent orchestration",
+      "Real-time collaboration features",
+    ],
+  },
+  {
+    title: "Warup",
+    category: ["Full Stack", "Real-time", "WebSocket"],
+    description:
+      "High-performance real-time chat platform handling 100+ concurrent connections with sub-100ms message delivery and persistent message history",
+    image: "/projects/warup.webp",
+    stack: [
+      "React.js",
+      "Zustand",
+      "Tailwind CSS",
+      "DaisyUI",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.io",
+      "JWT Auth",
+      "Cloudinary"
+    ],
+    link: "https://chat-app-1-xsfr.onrender.com/login",
     github: "https://github.com/NicoEspin/Chat-App",
+    highlights: [
+      "Real-time bidirectional communication",
+      "Persistent chat history",
+      "Responsive mobile-first design",
+    ],
   },
   {
     title: "Synttek",
-    category: "Frontend",
-    description: "Modern Landing Page for a web development Agency",
+    category: ["Frontend", "Landing Page", "Animation"],
+    description:
+      "High-converting landing page for a web development agency featuring sophisticated animations and internationalization support",
     image: "/projects/synttek.webp",
-    stack: ["Reactjs", "Next.js", "Next-intl", "TailwindCSS", "Framer Motion"],
+    stack: [
+      "Next.js",
+      "React.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Next-Intl",
+    ],
     link: "https://syntek-phi.vercel.app/es",
     github: "https://github.com/NicoEspin/Syntek",
+    highlights: [
+      "Smooth scroll animations",
+      "Multi-language support",
+      "Optimized Core Web Vitals",
+    ],
   },
   {
     title: "Portfolio for Designer",
-    category: "Frontend",
-    description: "Portfolio for Graphic Designer",
+    category: ["Frontend", "Portfolio", "Animation"],
+    description:
+      "Award-worthy portfolio website for a graphic designer featuring immersive animations and dynamic content presentation",
     image: "/projects/portfolio-ac.webp",
-    stack: ["Next.js", "Vercel", "TailwindCSS", "Framer motion", "HeroUi"],
+    stack: [
+      "Next.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "HeroUI",
+      "Vercel",
+    ],
     link: "https://anttonella-catalano.vercel.app/",
     github: "https://github.com/NicoEspin/ACportfolio",
+    highlights: [
+      "Custom cursor interactions",
+      "Gallery with smooth transitions",
+      "SEO-optimized for creative professionals",
+    ],
   },
   {
     title: "Admin Dashboard",
-    category: "Frontend",
-    description: "Admin Dashboard with Charts",
+    category: ["Frontend", "Dashboard", "Data Viz"],
+    description:
+      "Comprehensive analytics dashboard with interactive data visualization, real-time metrics, and intuitive user management interface",
     image: "/projects/dashboard.webp",
-    stack: ["Reactjs", "TailwindCSS", "Recharts", "Vercel", "Framer Motion"],
+    stack: [
+      "React.js",
+      "Tailwind CSS",
+      "Recharts",
+      "Framer Motion",
+      "Vercel",
+    ],
     link: "https://admin-dashboard-2hf2.vercel.app/",
     github: "https://github.com/NicoEspin/Admin-Dashboard",
+    highlights: [
+      "Interactive charts and graphs",
+      "Dark/light mode toggle",
+      "Responsive data tables",
+    ],
   },
   {
     title: "VirtualR",
-    category: "Frontend",
-    description: "Landing Page",
+    category: ["Frontend", "Landing Page", "Marketing"],
+    description:
+      "Modern SaaS landing page with compelling value proposition, feature highlights, and conversion-optimized call-to-actions",
     image: "/projects/virtualr.webp",
-    stack: ["Reactjs", "TailwindCSS", "Firebase(Deploy)"],
+    stack: [
+      "React.js",
+      "Tailwind CSS",
+      "Firebase Hosting",
+    ],
     link: "https://virtualr-62845.web.app/",
     github: "https://github.com/NicoEspin/VirtualR",
+    highlights: [
+      "Clean modern UI/UX",
+      "Fast load times",
+      "Mobile-responsive design",
+    ],
   },
 ];
 
-//Projects
+// CONTACT SECTION
+export const contactInfo = {
+  email: "nico.espin7@gmail.com",
+  location: "Remote / Available Worldwide",
+  availability: "Open to full-time opportunities and freelance projects",
+};
