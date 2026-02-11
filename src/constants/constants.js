@@ -5,14 +5,14 @@ const importAllLogos = import.meta.glob(
     eager: true,
     query: "?url",
     import: "default",
-  }
+  },
 );
 
 export const logos = Object.fromEntries(
   Object.entries(importAllLogos).map(([path, url]) => {
     const fileName = path.split("/").pop();
     return [fileName, url];
-  })
+  }),
 );
 
 // NAVIGATION
@@ -75,9 +75,14 @@ export const skills = [
     title: "AI & Automation",
     skills: [
       { name: "OpenAI API", logo: logos["openai.svg"] || logos["openai.png"] },
-      { name: "AI Agents", logo: logos["ai.svg"] || logos["brain.svg"] },
+      { name: "Gemini API", logo: logos["gemini.svg"] || logos["gemini.png"] },
+      { name: "AI Agents", logo: logos["agent.svg"] || logos["brain.svg"] },
       { name: "n8n", logo: logos["n8n.svg"] },
-      { name: "Prompt Engineering", logo: logos["prompt.svg"] || logos["chat.svg"] },
+      { name: "Playwright MCP", logo: logos["playwright.svg"] },
+      {
+        name: "Prompt Engineering",
+        logo: logos["prompt.svg"] || logos["chat.svg"],
+      },
     ],
   },
   {
@@ -90,11 +95,6 @@ export const skills = [
       { name: "AWS", logo: logos["aws.svg"] },
       { name: "Docker", logo: logos["docker.svg"] },
       { name: "Vercel", logo: logos["vercel.svg"] || logos["vercel.png"] },
-    ],
-  },
-  {
-    title: "No-Code/Low-Code",
-    skills: [
       { name: "WordPress", logo: logos["wordpress.svg"] },
       { name: "Bubble.io", logo: logos["bubble.svg"] },
     ],
@@ -191,6 +191,44 @@ export const projects = [
     ],
   },
   {
+    title: "Thumblify",
+    category: ["Full Stack", "AI", "Product"],
+    description:
+      "AI-powered YouTube thumbnail generator with authentication, personal gallery, and a public community feed. Includes styles, aspect ratios, color schemes, visibility (public/private), and reference images to guide generation.",
+    image: "/projects/thumblify.webp", // asegurate de subir esta imagen a /public/projects
+    stack: [
+      // Frontend
+      "React 19",
+      "Vite 7",
+      "TypeScript",
+      "React Router",
+      "Tailwind CSS v4",
+      "i18next",
+      "Axios (withCredentials)",
+      "Motion",
+      "Sonner",
+      "Lucide",
+      // Backend
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "express-session",
+      "connect-mongo",
+      "Multer",
+      "Cloudinary",
+      "Gemini (@google/genai)",
+    ],
+    link: "https://thumblify-chi-henna.vercel.app/",
+    github: "https://github.com/NicoEspin/Thumbnail-Generator", // Frontend repo
+    highlights: [
+      "Generation with style, aspect ratio, color scheme, visibility (public/private) + optional text overlay",
+      "Reference images (up to 2) with roles: auto/person/background/style",
+      "My Generations gallery + Community feed with pagination (Load more)",
+      "Backend repo: https://github.com/NicoEspin/Thumbnail-Generator-Backend",
+    ],
+  },
+  {
     title: "Warup",
     category: ["Full Stack", "Real-time", "WebSocket"],
     description:
@@ -206,7 +244,7 @@ export const projects = [
       "MongoDB",
       "Socket.io",
       "JWT Auth",
-      "Cloudinary"
+      "Cloudinary",
     ],
     link: "https://chat-app-1-xsfr.onrender.com/login",
     github: "https://github.com/NicoEspin/Chat-App",
@@ -243,13 +281,7 @@ export const projects = [
     description:
       "Award-worthy portfolio website for a graphic designer featuring immersive animations and dynamic content presentation",
     image: "/projects/portfolio-ac.webp",
-    stack: [
-      "Next.js",
-      "Tailwind CSS",
-      "Framer Motion",
-      "HeroUI",
-      "Vercel",
-    ],
+    stack: ["Next.js", "Tailwind CSS", "Framer Motion", "HeroUI", "Vercel"],
     link: "https://anttonella-catalano.vercel.app/",
     github: "https://github.com/NicoEspin/ACportfolio",
     highlights: [
@@ -264,13 +296,7 @@ export const projects = [
     description:
       "Comprehensive analytics dashboard with interactive data visualization, real-time metrics, and intuitive user management interface",
     image: "/projects/dashboard.webp",
-    stack: [
-      "React.js",
-      "Tailwind CSS",
-      "Recharts",
-      "Framer Motion",
-      "Vercel",
-    ],
+    stack: ["React.js", "Tailwind CSS", "Recharts", "Framer Motion", "Vercel"],
     link: "https://admin-dashboard-2hf2.vercel.app/",
     github: "https://github.com/NicoEspin/Admin-Dashboard",
     highlights: [
@@ -279,25 +305,21 @@ export const projects = [
       "Responsive data tables",
     ],
   },
-  {
-    title: "VirtualR",
-    category: ["Frontend", "Landing Page", "Marketing"],
-    description:
-      "Modern SaaS landing page with compelling value proposition, feature highlights, and conversion-optimized call-to-actions",
-    image: "/projects/virtualr.webp",
-    stack: [
-      "React.js",
-      "Tailwind CSS",
-      "Firebase Hosting",
-    ],
-    link: "https://virtualr-62845.web.app/",
-    github: "https://github.com/NicoEspin/VirtualR",
-    highlights: [
-      "Clean modern UI/UX",
-      "Fast load times",
-      "Mobile-responsive design",
-    ],
-  },
+  // {
+  //   title: "VirtualR",
+  //   category: ["Frontend", "Landing Page", "Marketing"],
+  //   description:
+  //     "Modern SaaS landing page with compelling value proposition, feature highlights, and conversion-optimized call-to-actions",
+  //   image: "/projects/virtualr.webp",
+  //   stack: ["React.js", "Tailwind CSS", "Firebase Hosting"],
+  //   link: "https://virtualr-62845.web.app/",
+  //   github: "https://github.com/NicoEspin/VirtualR",
+  //   highlights: [
+  //     "Clean modern UI/UX",
+  //     "Fast load times",
+  //     "Mobile-responsive design",
+  //   ],
+  // },
 ];
 
 // CONTACT SECTION

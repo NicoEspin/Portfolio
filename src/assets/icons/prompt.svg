@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" fill="none" role="img" aria-label="Prompt Engineering icon">
+  <g stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M44 56h112a20 20 0 0 1 20 20v68a20 20 0 0 1-20 20H86l-34 26v-26H44a20 20 0 0 1-20-20V76a20 20 0 0 1 20-20Z"/>
+    <path d="M78 114l-18 14 18 14"/>
+    <path d="M114 114l18 14-18 14"/>
+    <path d="M96 110l-10 36"/>
+    <path d="M176 128h16"/>
+    <path d="M192 128l-10-10"/>
+    <path d="M192 128l-10 10"/>
+    <circle cx="214" cy="128" r="20"/>
+    <path d="M214 98v10"/>
+    <path d="M214 148v10"/>
+    <path d="M184 128h10"/>
+    <path d="M234 128h10"/>
+    <path d="M193 107l7 7"/>
+    <path d="M228 142l7 7"/>
+    <path d="M235 107l-7 7"/>
+    <path d="M200 142l-7 7"/>
+    <path d="M206 64l4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z"/>
+    <path d="M236 76l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z"/>
+  </g>
+</svg>

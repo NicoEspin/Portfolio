@@ -11,7 +11,7 @@ const Skills = () => {
       <motion.div variants={textVariant()}>
         <h2 className="mb-20 text-4xl lg:text-5xl tracking-wider text-center text-text1 ">
           {"<"}
-          <span className="font-bold text-primary1">My Stack </span>
+          <span className="font-bold text-primary1">My Skills </span>
           {"/>"}
         </h2>
       </motion.div>
