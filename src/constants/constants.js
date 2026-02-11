@@ -198,24 +198,17 @@ export const projects = [
     image: "/projects/thumblify.webp", // asegurate de subir esta imagen a /public/projects
     stack: [
       // Frontend
-      "React 19",
-      "Vite 7",
+      "React",
       "TypeScript",
-      "React Router",
-      "Tailwind CSS v4",
+      "Tailwind",
       "i18next",
-      "Axios (withCredentials)",
+      "Axios",
       "Motion",
-      "Sonner",
       "Lucide",
       // Backend
       "Node.js",
       "Express",
       "MongoDB",
-      "Mongoose",
-      "express-session",
-      "connect-mongo",
-      "Multer",
       "Cloudinary",
       "Gemini (@google/genai)",
     ],
