@@ -465,7 +465,7 @@ export function ChatWidget() {
         },
         // ⚠️ evita caché intermedia en algunos entornos
         cache: "no-store",
-        body: JSON.stringify({ messages: base }),
+       body: JSON.stringify({ messages: base.map(({ role, content }) => ({ role, content })) }),
       });
 
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
