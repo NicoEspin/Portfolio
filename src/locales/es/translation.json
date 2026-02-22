@@ -1,0 +1,220 @@
+{
+  "nav": {
+    "tabs": {
+      "about": "Sobre mí",
+      "skills": "Habilidades",
+      "experience": "Experiencia",
+      "projects": "Proyectos",
+      "contact": "Contacto"
+    },
+    "mobileFooter": "Portafolio — 2025",
+    "lang": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "aria": {
+      "goTop": "Ir al inicio",
+      "switchToEs": "Cambiar a español",
+      "switchToEn": "Cambiar a inglés",
+      "openMenu": "Abrir menú",
+      "closeMenu": "Cerrar menú"
+    }
+  },
+  "hero": {
+    "badge": {
+      "available": "Disponible para oportunidades"
+    },
+    "roles": [
+      "Desarrollador Full Stack",
+      "Arquitecto Frontend",
+      "Especialista en integración de IA"
+    ],
+    "description": "Construyo aplicaciones web escalables que resuelven problemas reales de negocio. En Andeshire, lideré la migración completa del frontend desde Django Templates hacia un stack moderno con Next.js + TypeScript + Redux, definiendo patrones y convenciones usados por todo el equipo. Me especializo en ecosistemas React de alto rendimiento y en orquestación de agentes de IA, automatizando flujos de reclutamiento que convierten horas de trabajo manual en minutos. Mi foco es crear sistemas mantenibles, rápidos y con impacto medible.",
+    "stats": {
+      "components": "Componentes creados",
+      "projects": "Proyectos entregados",
+      "years": "Años de experiencia"
+    },
+    "cta": {
+      "resume": "CV"
+    },
+    "tags": {
+      "stackLabel": "const stack =",
+      "stackValue": "Next · Node · IA",
+      "remote": "Remoto / En todo el mundo"
+    }
+  },
+  "skills": {
+    "eyebrow": "Con lo que trabajo",
+    "title": "Mis habilidades",
+    "labels": {
+      "skills": "habilidades",
+      "technologies": "tecnologías",
+      "total": "Total"
+    },
+    "categories": {
+      "frontend": { "title": "Frontend" },
+      "backend": { "title": "Backend" },
+      "ai": { "title": "IA y automatización" },
+      "tools": { "title": "Herramientas y plataformas" }
+    }
+  },
+  "experience": {
+    "eyebrow": "Dónde he trabajado",
+    "title": "Experiencia",
+    "aria": {
+      "expand": "Expandir",
+      "collapse": "Contraer"
+    },
+    "items": {
+      "andeshire": {
+        "title": "Desarrollador Full Stack",
+        "date": "Ene 2025 - Actualidad",
+        "points": [
+          "Diseñé y ejecuté la migración desde Django Templates monolíticos hacia Next.js + TypeScript + Redux, estableciendo estándares y patrones adoptados por todo el equipo",
+          "Desarrollé un sistema de diseño con más de 600 componentes reutilizables y una arquitectura Redux por features, reduciendo el tiempo de desarrollo de nuevas funcionalidades en aproximadamente un 30%",
+          "Implementé optimizaciones avanzadas de rendimiento (lazy loading, code splitting, memoización selectiva y auditorías de selectores), mejorando Core Web Vitals y la velocidad percibida",
+          "Diseñé y orquesté flujos con agentes de IA para automatizar screening de candidatos, generación de contenido y acciones de reclutamiento, con mejoras medibles de eficiencia",
+          "Estandaricé contratos de API entre el backend en Django y el frontend, reduciendo inconsistencias de datos y bugs de integración mediante protocolos claros de serialización",
+          "Establecí prácticas de calidad a nivel equipo: patrones de manejo de estado, hooks reutilizables, manejo de errores y convenciones estrictas de revisión de PR"
+        ]
+      },
+      "wehunter": {
+        "title": "Desarrollador Bubble.io",
+        "date": "Feb 2025 - May 2025",
+        "points": [
+          "Entregué un MVP listo para producción en 3 meses usando Bubble.io, permitiendo validar el modelo de negocio con usuarios reales y obtener tracción temprana",
+          "Diseñé un esquema de base de datos escalable con modelos relacionales complejos para más de 10.000 registros, manteniendo rendimiento e integridad",
+          "Construí integraciones robustas con APIs de terceros (búsqueda de país, validaciones) con manejo de errores, reintentos y validación en tiempo real",
+          "Traduje diseños de Figma a interfaces funcionales pixel-perfect con layouts responsive, accesibilidad y buenas interacciones",
+          "Implementé flujos de testing automatizado y QA que detectaron y resolvieron más de 20 issues críticos antes del lanzamiento"
+        ]
+      },
+      "freelance": {
+        "title": "Desarrollador WordPress",
+        "date": "Ago 2024 - Feb 2025",
+        "points": [
+          "Desarrollé más de 5 soluciones WordPress a medida desde cero, adaptadas a necesidades de negocio y lineamientos de marca",
+          "Logré una reducción promedio del 50% en tiempos de carga mediante optimizaciones de rendimiento (caché, imágenes, arquitectura mínima de plugins)",
+          "Mantuve una tasa de retención de clientes del 100% con comunicación proactiva, soporte continuo y capacitación para gestionar contenidos",
+          "Implementé diseño responsive mobile-first y compatibilidad cross-browser, contribuyendo directamente a mejoras de SEO"
+        ]
+      },
+      "personal": {
+        "title": "Desarrollador Full Stack",
+        "date": "Dic 2022 - Actualidad",
+        "points": [
+          "Diseñé y publiqué múltiples aplicaciones full stack con MERN (MongoDB, Express.js, React.js, Node.js), con foco en arquitectura limpia y escalabilidad",
+          "Implementé funcionalidades en tiempo real con Socket.io, autenticación JWT y diseño de APIs REST",
+          "Gestioné el ciclo completo de proyectos, desde concepto hasta despliegue, usando CI/CD e infraestructura cloud (Vercel, Firebase, Render)",
+          "Mejoré continuamente los flujos de desarrollo y adopté mejores prácticas de calidad, seguridad y performance"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Lo que he creado",
+    "title": "Proyectos",
+    "cta": {
+      "livePreview": "Ver demo",
+      "livePreviewTitle": "Ver demo"
+    },
+    "items": {
+      "andeshire": {
+        "title": "Andeshire",
+        "category": ["Full Stack", "Integración de IA", "Enterprise"],
+        "description": "Plataforma ATS de nivel enterprise con filtrado de candidatos impulsado por IA, que multiplica por 10 la eficiencia del equipo de recruiting mediante screening automatizado y orquestación inteligente de flujos",
+        "highlights": [
+          "Sistema de diseño con 600+ componentes",
+          "Orquestación de agentes de IA",
+          "Funciones de colaboración en tiempo real"
+        ]
+      },
+      "thumblify": {
+        "title": "Thumblify",
+        "category": ["Full Stack", "IA", "Producto"],
+        "description": "Generador de miniaturas de YouTube con IA con autenticación, galería personal y un feed comunitario público. Incluye estilos, relaciones de aspecto, esquemas de color, visibilidad (público/privado) e imágenes de referencia para guiar la generación.",
+        "highlights": [
+          "Generación con estilo, relación de aspecto, esquema de color, visibilidad (público/privado) + texto opcional",
+          "Imágenes de referencia (hasta 2) con roles: auto/persona/fondo/estilo",
+          "Galería Mis Generaciones + feed de Comunidad con paginación (Cargar más)",
+          "Repositorio backend: https://github.com/NicoEspin/Thumbnail-Generator-Backend"
+        ]
+      },
+      "warup": {
+        "title": "Warup",
+        "category": ["Full Stack", "Tiempo real", "WebSocket"],
+        "description": "Plataforma de chat en tiempo real de alto rendimiento con 100+ conexiones concurrentes, entrega de mensajes por debajo de 100ms e historial persistente",
+        "highlights": [
+          "Comunicación bidireccional en tiempo real",
+          "Historial de chat persistente",
+          "Diseño responsive mobile-first"
+        ]
+      },
+      "synttek": {
+        "title": "Synttek",
+        "category": ["Frontend", "Landing Page", "Animación"],
+        "description": "Landing page de alta conversión para una agencia de desarrollo web con animaciones sofisticadas y soporte de internacionalización",
+        "highlights": [
+          "Animaciones de scroll suaves",
+          "Soporte multi-idioma",
+          "Core Web Vitals optimizados"
+        ]
+      },
+      "designer": {
+        "title": "Portafolio para diseñadora",
+        "category": ["Frontend", "Portafolio", "Animación"],
+        "description": "Sitio portfolio destacado para una diseñadora gráfica, con animaciones inmersivas y presentación dinámica de contenido",
+        "highlights": [
+          "Interacciones de cursor personalizadas",
+          "Galería con transiciones suaves",
+          "SEO optimizado para profesionales creativos"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Trabajemos juntos",
+    "title": "Contacto",
+    "panelTitle": "Ponte en contacto",
+    "panelSubtitle": "¿Tienes un proyecto en mente o quieres conversar? Escríbeme.",
+    "availability": "Disponible para oportunidades full-time y proyectos freelance",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje",
+      "placeholders": {
+        "name": "Nicolas Espin",
+        "email": "hola@ejemplo.com",
+        "message": "Cuéntame sobre tu proyecto u oportunidad..."
+      },
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "errorGeneric": "Algo salió mal. Intenta de nuevo."
+    },
+    "success": {
+      "title": "Mensaje enviado",
+      "subtitle": "Gracias por escribir. Te responderé lo antes posible.",
+      "reset": "Enviar otro mensaje"
+    }
+  },
+  "chat": {
+    "aria": {
+      "open": "Abrir chat",
+      "close": "Cerrar chat"
+    },
+    "welcome": "Hola 👋 Soy Coquito, el asistente del portafolio de Nico. ¿Qué te gustaría saber?",
+    "subtitle": "Asistente del portafolio",
+    "placeholder": "Pregunta sobre experiencia, proyectos, stack…",
+    "typing": "Escribiendo…",
+    "send": "Enviar",
+    "sending": "Enviando...",
+    "errors": {
+      "stream": "Error de conexión.",
+      "connect": "Ups — hubo un error al conectar con el chat. Intenta de nuevo en unos segundos."
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  }
+}

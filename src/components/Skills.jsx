@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { skills } from "../constants/constants.js";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "../hoc";
+import { useTranslation } from "react-i18next";
 
 const categoryAccents = {
-  Frontend:            { symbol: "◈", color: "#a78bfa" },
-  Backend:             { symbol: "◎", color: "#60a5fa" },
-  "AI & Automation":   { symbol: "◆", color: "#34d399" },
-  "Tools & Platforms": { symbol: "◇", color: "#f472b6" },
+  frontend: { symbol: "◈", color: "#a78bfa" },
+  backend:  { symbol: "◎", color: "#60a5fa" },
+  ai:       { symbol: "◆", color: "#34d399" },
+  tools:    { symbol: "◇", color: "#f472b6" },
 };
 
 /* ─── Single skill card ─── */
@@ -53,8 +54,9 @@ const SkillCard = ({ skill, index }) => (
 );
 
 /* ─── Mobile category card (2×2 grid) ─── */
-const MobileCategoryCard = ({ category, index, isActive, onClick }) => {
-  const acc = categoryAccents[category.title] || { symbol: "◉", color: "#a78bfa" };
+const MobileCategoryCard = ({ category, isActive, onClick, t }) => {
+  const title = t(`skills.categories.${category.id}.title`);
+  const acc = categoryAccents[category.id] || { symbol: "◉", color: "#a78bfa" };
   return (
     <button
       onClick={onClick}
@@ -76,13 +78,13 @@ const MobileCategoryCard = ({ category, index, isActive, onClick }) => {
       {/* Title */}
       <span className={`text-xs font-semibold leading-tight transition-colors duration-250
         ${isActive ? "text-text1" : "text-text1/45"}`}>
-        {category.title}
+        {title}
       </span>
 
       {/* Count pill */}
       <span className={`text-[10px] font-mono tabular-nums transition-colors duration-250
         ${isActive ? "text-primary1/70" : "text-text1/25"}`}>
-        {category.skills.length} skills
+        {category.skills.length} {t("skills.labels.skills")}
       </span>
 
       {/* Active border overlay via layoutId */}
@@ -99,9 +101,11 @@ const MobileCategoryCard = ({ category, index, isActive, onClick }) => {
 
 /* ─── Main component ─── */
 const Skills = () => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const activeCategory = skills[activeIndex];
-  const accent = categoryAccents[activeCategory.title] || { symbol: "◉", color: "#a78bfa" };
+  const activeTitle = t(`skills.categories.${activeCategory.id}.title`);
+  const accent = categoryAccents[activeCategory.id] || { symbol: "◉", color: "#a78bfa" };
 
   return (
     <section className="px-4 py-16 sm:px-6 md:px-12 lg:px-10 md:py-24 lg:pt-32">
@@ -114,11 +118,11 @@ const Skills = () => {
         className="mb-10 sm:mb-14 text-center"
       >
         <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-text1/35 mb-3">
-          What I work with
+          {t("skills.eyebrow")}
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-wider text-text1">
           {"<"}
-          <span className="font-bold text-primary1">My Skills </span>
+          <span className="font-bold text-primary1">{t("skills.title")} </span>
           {"/>"}
         </h2>
         <motion.div
@@ -146,9 +150,9 @@ const Skills = () => {
               <MobileCategoryCard
                 key={index}
                 category={category}
-                index={index}
                 isActive={activeIndex === index}
                 onClick={() => setActiveIndex(index)}
+                t={t}
               />
             ))}
           </motion.div>
@@ -158,7 +162,7 @@ const Skills = () => {
             <div className="flex-1 h-px bg-white/[0.06]" />
             <span className="flex items-center gap-1.5 text-[10px] text-text1/35 uppercase tracking-widest">
               <span style={{ color: accent.color }}>{accent.symbol}</span>
-              {activeCategory.title}
+              {activeTitle}
               <span className="text-text1/20 font-mono">· {activeCategory.skills.length}</span>
             </span>
             <div className="flex-1 h-px bg-white/[0.06]" />
@@ -199,7 +203,8 @@ const Skills = () => {
             className="w-[210px] flex-shrink-0 flex flex-col gap-2"
           >
             {skills.map((category, index) => {
-              const acc = categoryAccents[category.title] || { symbol: "◉", color: "#a78bfa" };
+              const title = t(`skills.categories.${category.id}.title`);
+              const acc = categoryAccents[category.id] || { symbol: "◉", color: "#a78bfa" };
               const isActive = activeIndex === index;
               return (
                 <button
@@ -218,7 +223,7 @@ const Skills = () => {
                   >
                     {acc.symbol}
                   </span>
-                  <span className="flex-1 truncate">{category.title}</span>
+                  <span className="flex-1 truncate">{title}</span>
                   <span className={`text-xs tabular-nums ${isActive ? "text-primary1/70" : "text-text1/25"}`}>
                     {category.skills.length}
                   </span>
@@ -234,9 +239,9 @@ const Skills = () => {
             })}
 
             <div className="flex items-center gap-2 pt-4 mt-1 border-t border-white/[0.06] px-1">
-              <span className="text-[10px] text-text1/25 uppercase tracking-widest">Total</span>
+              <span className="text-[10px] text-text1/25 uppercase tracking-widest">{t("skills.labels.total")}</span>
               <span className="text-[10px] text-primary1/50 font-mono">
-                {skills.reduce((a, c) => a + c.skills.length, 0)} skills
+                {skills.reduce((a, c) => a + c.skills.length, 0)} {t("skills.labels.skills")}
               </span>
             </div>
           </motion.div>
@@ -251,10 +256,10 @@ const Skills = () => {
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2">
                 <span className="text-base" style={{ color: accent.color }}>{accent.symbol}</span>
-                <h3 className="text-sm sm:text-base font-semibold text-text1">{activeCategory.title}</h3>
+                <h3 className="text-sm sm:text-base font-semibold text-text1">{activeTitle}</h3>
               </div>
               <span className="text-xs text-text1/30 font-mono">
-                {activeCategory.skills.length} technologies
+                {activeCategory.skills.length} {t("skills.labels.technologies")}
               </span>
             </div>
 

@@ -3,11 +3,18 @@ import { motion } from "framer-motion";
 import { experiences } from "../constants/constants";
 import { SectionWrapper } from "../hoc";
 import { MapPin, Calendar, ChevronDown, ChevronUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 /* ─── Single experience card ─── */
 const ExperienceCard = ({ experience, index }) => {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(index === 0);
   const isEven = index % 2 === 0;
+
+  const title = t(`experience.items.${experience.id}.title`);
+  const date = t(`experience.items.${experience.id}.date`);
+  const pointsRaw = t(`experience.items.${experience.id}.points`, { returnObjects: true });
+  const points = Array.isArray(pointsRaw) ? pointsRaw : [];
 
   return (
     <div className="relative flex flex-col lg:flex-row lg:items-start gap-0 lg:gap-0">
@@ -78,7 +85,7 @@ const ExperienceCard = ({ experience, index }) => {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <h3 className="text-base sm:text-lg font-bold text-text1 leading-snug truncate">
-                    {experience.title}
+                    {title}
                   </h3>
                   <p className="text-sm text-primary1/80 font-medium mt-0.5">
                     {experience.company_name}
@@ -91,7 +98,7 @@ const ExperienceCard = ({ experience, index }) => {
                   className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-lg
                     border border-white/[0.08] bg-white/[0.03] hover:border-primary1/30
                     text-text1/40 hover:text-primary1/70 transition-all duration-200"
-                  aria-label={expanded ? "Collapse" : "Expand"}
+                  aria-label={expanded ? t("experience.aria.collapse") : t("experience.aria.expand")}
                 >
                   {expanded
                     ? <ChevronUp size={13} />
@@ -103,7 +110,7 @@ const ExperienceCard = ({ experience, index }) => {
               {/* Date badge */}
               <div className="flex items-center gap-1.5 mt-2">
                 <Calendar size={11} className="text-text1/30 flex-shrink-0" />
-                <span className="text-[11px] text-text1/40 font-mono">{experience.date}</span>
+                <span className="text-[11px] text-text1/40 font-mono">{date}</span>
               </div>
             </div>
           </div>
@@ -117,7 +124,7 @@ const ExperienceCard = ({ experience, index }) => {
           >
             <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0 border-t border-white/[0.05]">
               <ul className="mt-4 space-y-3">
-                {experience.points.map((point, idx) => (
+                {points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     {/* Bullet */}
                     <span className="flex-shrink-0 mt-[7px] w-1.5 h-1.5 rounded-full bg-primary1/50" />
@@ -137,6 +144,7 @@ const ExperienceCard = ({ experience, index }) => {
 
 /* ─── Main section ─── */
 const Experience = () => {
+  const { t } = useTranslation();
   return (
     <section className="px-4 py-16 sm:px-6 md:px-12 lg:px-10 md:py-24 lg:pt-32">
 
@@ -148,11 +156,11 @@ const Experience = () => {
         className="mb-14 sm:mb-20 text-center"
       >
         <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-text1/35 mb-3">
-          Where I've worked
+          {t("experience.eyebrow")}
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-wider text-text1">
           {"<"}
-          <span className="font-bold text-primary1">Experience </span>
+          <span className="font-bold text-primary1">{t("experience.title")} </span>
           {"/>"}
         </h2>
         <motion.div

@@ -2,8 +2,10 @@ import { projects } from "../constants/constants";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "../hoc";
 import ProjectCard from "./ProjectCard";
+import { useTranslation } from "react-i18next";
 
 const Projects = () => {
+  const { t } = useTranslation();
   return (
     <section className="px-4 py-16 sm:px-6 md:px-12 lg:px-10 md:py-24 lg:pt-32">
       {/* ── Heading ── */}
@@ -14,11 +16,11 @@ const Projects = () => {
         className="mb-12 sm:mb-16 text-center"
       >
         <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-text1/35 mb-3">
-          What I've built
+          {t("projects.eyebrow")}
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-wider text-text1">
           {"<"}
-          <span className="font-bold text-primary1">Projects </span>
+          <span className="font-bold text-primary1">{t("projects.title")} </span>
           {"/>"}
         </h2>
         <motion.div

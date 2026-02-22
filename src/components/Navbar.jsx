@@ -1,13 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+/* ─── SVG flag icons ─── */
+import usaFlag from "../assets/icons/usa.svg";
+import argFlag from "../assets/icons/argentina.svg";
 
 /* ─── Nav items (bilingual) ─── */
 const tabItems = [
-  { href: "hero",       en: "About",      es: "Sobre mí"  },
-  { href: "skills",     en: "Skills",     es: "Skills"    },
-  { href: "experience", en: "Experience", es: "Experiencia"},
-  { href: "projects",   en: "Projects",   es: "Proyectos" },
-  { href: "contact",    en: "Contact",    es: "Contacto"  },
+  { href: "hero",       key: "nav.tabs.about" },
+  { href: "skills",     key: "nav.tabs.skills" },
+  { href: "experience", key: "nav.tabs.experience" },
+  { href: "projects",   key: "nav.tabs.projects" },
+  { href: "contact",    key: "nav.tabs.contact" },
 ];
 
 /* ─── Smooth scroll ─── */
@@ -26,7 +30,7 @@ const Cursor = ({ position }) => (
 );
 
 /* ─── Desktop single tab ─── */
-const Tab = ({ item, setPosition, isActive, lang }) => {
+const Tab = ({ item, setPosition, isActive, t }) => {
   const ref = useRef(null);
 
   const handleMouseEnter = () => {
@@ -48,19 +52,19 @@ const Tab = ({ item, setPosition, isActive, lang }) => {
         className={`block px-3 py-1.5 md:px-5 md:py-2.5 text-[10px] md:text-sm uppercase tracking-widest font-medium mix-blend-difference transition-colors duration-200
           ${isActive ? "text-white" : "text-text1/60"}`}
       >
-        {lang === "es" ? item.es : item.en}
+        {t(item.key)}
       </a>
     </li>
   );
 };
 
 /* ─── Logo ─── */
-const Logo = () => (
+const Logo = ({ t }) => (
   <button
     onClick={() => scrollTo("hero")}
     className="flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm
       hover:border-primary1/40 hover:bg-primary1/10 transition-all duration-300 group flex-shrink-0"
-    aria-label="Go to top"
+    aria-label={t("nav.aria.goTop")}
   >
     {/* Recreating the <NE/> logo mark with text */}
     <span className="font-mono text-[9px] font-bold leading-none text-primary1 group-hover:text-primary1 tracking-tight select-none">
@@ -69,21 +73,32 @@ const Logo = () => (
   </button>
 );
 
-/* ─── SVG flag icons ─── */
-const USAFlag = () => (
-  <img src="src/assets/icons/usa.svg" alt="English" className="w-5 h-5 rounded-full object-cover" draggable={false} />
+
+
+const USAFlag = ({ t }) => (
+  <img
+    src={usaFlag}
+    alt={t("nav.lang.en")}
+    className="w-5 h-5 rounded-full object-cover"
+    draggable={false}
+  />
 );
-const ARGFlag = () => (
-  <img src="src/assets/icons/argentina.svg" alt="Español" className="w-5 h-5 rounded-full object-cover" draggable={false} />
+const ARGFlag = ({ t }) => (
+  <img
+    src={argFlag}
+    alt={t("nav.lang.es")}
+    className="w-5 h-5 rounded-full object-cover"
+    draggable={false}
+  />
 );
 
 /* ─── Language Toggle — classic toggle switch with flag thumb ─── */
-const LangToggle = ({ lang, setLang }) => {
+const LangToggle = ({ lang, onToggle, t }) => {
   const isEN = lang === "en";
   return (
     <button
-      onClick={() => setLang(isEN ? "es" : "en")}
-      aria-label={isEN ? "Switch to Spanish" : "Switch to English"}
+      onClick={onToggle}
+      aria-label={isEN ? t("nav.aria.switchToEs") : t("nav.aria.switchToEn")}
       role="switch"
       aria-checked={isEN}
       className={`relative flex items-center w-14 h-7 rounded-full border transition-all duration-300 flex-shrink-0 cursor-pointer
@@ -92,10 +107,10 @@ const LangToggle = ({ lang, setLang }) => {
           : "bg-white/[0.06] border-white/10 hover:border-primary1/40"
         }`}
     >
-      {/* Track label — faint country code on the inactive side */}
+      {/* Track label — current language code on the active side, next to the thumb */}
       <span
-        className="absolute text-[8px] font-mono tracking-widest text-white/20 uppercase select-none pointer-events-none"
-        style={{ left: isEN ? "auto" : "7px", right: isEN ? "7px" : "auto", transition: "all 0.3s" }}
+        className="absolute text-[8px] font-mono tracking-widest text-white/40 uppercase select-none pointer-events-none"
+        style={{ left: isEN ? "29px" : "7px", transition: "all 0.3s" }}
       >
         {isEN ? "EN" : "ES"}
       </span>
@@ -107,17 +122,17 @@ const LangToggle = ({ lang, setLang }) => {
         className="absolute flex items-center justify-center w-[22px] h-[22px] rounded-full
           bg-white/10 border border-white/20 shadow-[0_2px_6px_rgba(0,0,0,0.5)] overflow-hidden"
       >
-        {isEN ? <USAFlag /> : <ARGFlag />}
+        {isEN ? <USAFlag t={t} /> : <ARGFlag t={t} />}
       </motion.span>
     </button>
   );
 };
 
 /* ─── Mobile Hamburger ─── */
-const Hamburger = ({ open, onClick }) => (
+const Hamburger = ({ open, onClick, t }) => (
   <button
     onClick={onClick}
-    aria-label={open ? "Close menu" : "Open menu"}
+    aria-label={open ? t("nav.aria.closeMenu") : t("nav.aria.openMenu")}
     className="relative z-[200] flex flex-col justify-center items-center w-9 h-9 rounded-full border border-white/10
       bg-white/[0.04] backdrop-blur-sm hover:border-primary1/40 hover:bg-primary1/10 transition-all duration-300"
   >
@@ -136,7 +151,7 @@ const Hamburger = ({ open, onClick }) => (
 );
 
 /* ─── Mobile Full-Screen Overlay ─── */
-const MobileMenu = ({ open, lang, setLang, activeSection, onClose }) => {
+const MobileMenu = ({ open, lang, onToggleLang, activeSection, onClose, t }) => {
   return (
     <AnimatePresence>
       {open && (
@@ -192,7 +207,7 @@ const MobileMenu = ({ open, lang, setLang, activeSection, onClose }) => {
                         className={`text-3xl font-medium uppercase tracking-wider transition-colors duration-200
                           ${activeSection === item.href ? "text-primary1" : "text-white/70 group-hover:text-white"}`}
                       >
-                        {lang === "es" ? item.es : item.en}
+                        {t(item.key)}
                       </span>
                       {/* Active dot */}
                       {activeSection === item.href && (
@@ -216,9 +231,9 @@ const MobileMenu = ({ open, lang, setLang, activeSection, onClose }) => {
               className="flex items-center justify-between px-8 pb-10"
             >
               <p className="text-[10px] uppercase tracking-[0.2em] text-text1/20 font-mono">
-                {lang === "es" ? "Portafolio — 2025" : "Portfolio — 2025"}
+                {t("nav.mobileFooter")}
               </p>
-              <LangToggle lang={lang} setLang={setLang} />
+              <LangToggle lang={lang} onToggle={onToggleLang} t={t} />
             </motion.div>
           </motion.div>
         </>
@@ -228,16 +243,18 @@ const MobileMenu = ({ open, lang, setLang, activeSection, onClose }) => {
 };
 
 /* ─── Main Navbar ─── */
-export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) => {
+export const Navbar = () => {
+  const { t, i18n } = useTranslation();
+
+  const lang = (i18n.resolvedLanguage || i18n.language || "en").startsWith("es")
+    ? "es"
+    : "en";
+  const toggleLang = () => i18n.changeLanguage(lang === "en" ? "es" : "en");
+
   const [position, setPosition]       = useState({ left: 0, width: 0, opacity: 0 });
   const [activeSection, setActiveSection] = useState("hero");
   const [scrolled, setScrolled]       = useState(false);
   const [mobileOpen, setMobileOpen]   = useState(false);
-
-  /* Internal lang state — falls back to prop if provided */
-  const [internalLang, setInternalLang] = useState("en");
-  const lang    = externalLang    ?? internalLang;
-  const setLang = externalSetLang ?? setInternalLang;
 
   /* Lock body scroll when mobile menu is open */
   useEffect(() => {
@@ -272,7 +289,7 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
             className="flex items-center gap-3"
           >
             {/* Logo */}
-            <Logo />
+            <Logo t={t} />
 
             {/* Pill nav */}
             <div
@@ -292,7 +309,7 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
                     item={item}
                     setPosition={setPosition}
                     isActive={activeSection === item.href}
-                    lang={lang}
+                    t={t}
                   />
                 ))}
                 <Cursor position={position} />
@@ -300,7 +317,7 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
             </div>
 
             {/* Language toggle */}
-            <LangToggle lang={lang} setLang={setLang} />
+            <LangToggle lang={lang} onToggle={toggleLang} t={t} />
           </motion.div>
         </div>
       </nav>
@@ -312,7 +329,7 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <Logo />
+          <Logo t={t} />
         </motion.div>
 
         <motion.div
@@ -320,7 +337,7 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <Hamburger open={mobileOpen} onClick={() => setMobileOpen((v) => !v)} />
+          <Hamburger open={mobileOpen} onClick={() => setMobileOpen((v) => !v)} t={t} />
         </motion.div>
       </nav>
 
@@ -328,9 +345,10 @@ export const Navbar = ({ lang: externalLang, setLang: externalSetLang } = {}) =>
       <MobileMenu
         open={mobileOpen}
         lang={lang}
-        setLang={setLang}
+        onToggleLang={toggleLang}
         activeSection={activeSection}
         onClose={() => setMobileOpen(false)}
+        t={t}
       />
     </>
   );

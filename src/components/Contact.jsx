@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Moon from "./Moon";
 import emailjs from "@emailjs/browser";
 import { Mail, User, MessageSquare, Send, CheckCircle, Github, Linkedin } from "lucide-react";
-import { githubLink, linkedinLink, contactInfo } from "../constants/constants.js";
+import { useTranslation } from "react-i18next";
+import { githubLink, linkedinLink, contactEmail } from "../constants/constants.js";
 
 const EMAILJS_KEY         = import.meta.env.VITE_APP_EMAILJS_KEY;
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
@@ -14,7 +15,7 @@ const inputBase =
   "w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-text1 placeholder:text-text1/25 outline-none transition-all duration-200 focus:border-primary1/50 focus:bg-primary1/[0.03] resize-none";
 
 /* ─── Success state ─── */
-const SuccessState = ({ onReset }) => (
+const SuccessState = ({ onReset, t }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -31,22 +32,23 @@ const SuccessState = ({ onReset }) => (
       <CheckCircle size={26} className="text-green-400" />
     </motion.div>
     <div>
-      <h3 className="text-base font-semibold text-text1 mb-1.5">Message sent!</h3>
+      <h3 className="text-base font-semibold text-text1 mb-1.5">{t("contact.success.title")}</h3>
       <p className="text-xs text-text1/45 max-w-[220px] leading-relaxed">
-        Thanks for reaching out. I'll get back to you as soon as possible.
+        {t("contact.success.subtitle")}
       </p>
     </div>
     <button
       onClick={onReset}
       className="text-xs text-primary1/50 hover:text-primary1 transition-colors duration-200 underline underline-offset-4"
     >
-      Send another message
+      {t("contact.success.reset")}
     </button>
   </motion.div>
 );
 
 /* ─── Main component ─── */
 const Contact = () => {
+  const { t } = useTranslation();
   emailjs.init(EMAILJS_KEY);
 
   const formRef = useRef();
@@ -87,7 +89,7 @@ const Contact = () => {
       .catch((err) => {
         setLoading(false);
         console.error(err);
-        setError("Something went wrong. Please try again.");
+        setError(t("contact.form.errorGeneric"));
       });
   };
 
@@ -102,11 +104,11 @@ const Contact = () => {
         className="mb-12 sm:mb-16 text-center"
       >
         <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-text1/35 mb-3">
-          Let's work together
+          {t("contact.eyebrow")}
         </p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl tracking-wider text-text1">
           {"<"}
-          <span className="font-bold text-primary1">Contact </span>
+          <span className="font-bold text-primary1">{t("contact.title")} </span>
           {"/>"}
         </h2>
         <motion.div
@@ -130,14 +132,14 @@ const Contact = () => {
           {/* Subtle top accent line */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary1/30 to-transparent pointer-events-none" />
 
-          <p className="text-base font-semibold text-text1 mb-1">Get in touch</p>
+          <p className="text-base font-semibold text-text1 mb-1">{t("contact.panelTitle")}</p>
           <p className="text-xs text-text1/40 mb-6 leading-relaxed">
-            Have a project in mind or want to chat? Drop me a message.
+            {t("contact.panelSubtitle")}
           </p>
 
           <AnimatePresence mode="wait">
             {sent ? (
-              <SuccessState key="success" onReset={() => setSent(false)} />
+              <SuccessState key="success" onReset={() => setSent(false)} t={t} />
             ) : (
               <motion.form
                 key="form"
@@ -152,7 +154,7 @@ const Contact = () => {
                 {/* Name */}
                 <label className="flex flex-col gap-1.5">
                   <span className="flex items-center gap-1.5 text-[10px] text-text1/40 uppercase tracking-widest">
-                    <User size={10} className="text-primary1/50" /> Name
+                    <User size={10} className="text-primary1/50" /> {t("contact.form.name")}
                   </span>
                   <input
                     required
@@ -160,7 +162,7 @@ const Contact = () => {
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    placeholder="Nicolas Espin"
+                    placeholder={t("contact.form.placeholders.name")}
                     className={inputBase}
                   />
                 </label>
@@ -168,7 +170,7 @@ const Contact = () => {
                 {/* Email */}
                 <label className="flex flex-col gap-1.5">
                   <span className="flex items-center gap-1.5 text-[10px] text-text1/40 uppercase tracking-widest">
-                    <Mail size={10} className="text-primary1/50" /> Email
+                    <Mail size={10} className="text-primary1/50" /> {t("contact.form.email")}
                   </span>
                   <input
                     required
@@ -176,7 +178,7 @@ const Contact = () => {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="hello@example.com"
+                    placeholder={t("contact.form.placeholders.email")}
                     className={inputBase}
                   />
                 </label>
@@ -184,7 +186,7 @@ const Contact = () => {
                 {/* Message */}
                 <label className="flex flex-col gap-1.5">
                   <span className="flex items-center gap-1.5 text-[10px] text-text1/40 uppercase tracking-widest">
-                    <MessageSquare size={10} className="text-primary1/50" /> Message
+                    <MessageSquare size={10} className="text-primary1/50" /> {t("contact.form.message")}
                   </span>
                   <textarea
                     required
@@ -192,7 +194,7 @@ const Contact = () => {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project or opportunity..."
+                    placeholder={t("contact.form.placeholders.message")}
                     className={inputBase}
                   />
                 </label>
@@ -219,12 +221,12 @@ const Contact = () => {
                         animate={{ rotate: 360 }}
                         transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                       />
-                      Sending...
+                      {t("contact.form.sending")}
                     </>
                   ) : (
                     <>
                       <Send size={12} className="opacity-80" />
-                      Send Message
+                      {t("contact.form.submit")}
                     </>
                   )}
                 </motion.button>
@@ -251,16 +253,16 @@ const Contact = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
             </span>
-            <p className="text-xs text-text1/50">{contactInfo.availability}</p>
+            <p className="text-xs text-text1/50">{t("contact.availability")}</p>
           </div>
 
           {/* Email + socials row */}
           <div className="flex items-center gap-3">
             <a
-              href={`mailto:${contactInfo.email}`}
+              href={`mailto:${contactEmail}`}
               className="text-xs text-text1/40 hover:text-primary1/80 transition-colors duration-200 font-mono"
             >
-              {contactInfo.email}
+              {contactEmail}
             </a>
             <span className="w-px h-3 bg-white/10" />
             <motion.a

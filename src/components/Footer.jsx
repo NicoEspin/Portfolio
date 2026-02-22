@@ -1,8 +1,10 @@
 import { Github, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { githubLink, linkedinLink, name } from "../constants/constants";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bottom-0 flex flex-col justify-center items-center py-10 bg-background1 gap-10">
       <div className="flex gap-5">
@@ -30,7 +32,7 @@ const Footer = () => {
         </motion.a>
       </div>
       <h2 className="uppercase text-primary1 text-2xl font-bold">{name}</h2>
-      <p className="text-sm text-text1">&copy;2025 Espin.  All rights reserved</p>
+      <p className="text-sm text-text1">&copy;2025 Espin. {t("footer.rights")}</p>
     </footer>
   );
 };

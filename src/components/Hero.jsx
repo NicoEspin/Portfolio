@@ -2,12 +2,12 @@ import React from "react";
 import BgAnimation from "./bg/BgAnimation";
 import {
   name,
-  description,
   resumeLink,
-  roles,
   githubLink,
   linkedinLink,
 } from "../constants/constants.js";
+
+import { useTranslation } from "react-i18next";
 
 import { Github, Linkedin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -67,6 +67,7 @@ const StatBadge = ({ value, label, delay }) => (
 );
 
 const HeroSection = () => {
+  const { t } = useTranslation();
   const firstName = name.split(" ")[0];
   const lastName = name.split(" ")[1];
 
@@ -87,9 +88,11 @@ const HeroSection = () => {
             <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-primary1/30 bg-primary1/5 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+            </span>
+              <span className="text-xs text-text1/60 tracking-widest uppercase">
+                {t("hero.badge.available")}
               </span>
-              <span className="text-xs text-text1/60 tracking-widest uppercase">Available for opportunities</span>
             </div>
           </FadeIn>
 
@@ -129,7 +132,7 @@ const HeroSection = () => {
               <h2 className="text-lg font-semibold md:text-xl lg:text-2xl text-primary1/90 font-mono">
                 <Typewriter
                   options={{
-                    strings: roles,
+                    strings: t("hero.roles", { returnObjects: true }),
                     autoStart: true,
                     loop: true,
                     deleteSpeed: 30,
@@ -144,15 +147,15 @@ const HeroSection = () => {
           {/* Description */}
           <FadeIn delay={0.7} direction="up">
             <p className="text-sm md:text-base lg:text-[15px] lg:max-w-[520px] text-text1/55 leading-relaxed">
-              {description}
+              {t("hero.description")}
             </p>
           </FadeIn>
 
           {/* Stats row */}
           <div className="flex gap-4 flex-wrap">
-            <StatBadge value="1000+" label="Components built" delay={0.85} />
-            <StatBadge value="20+"   label="Projects shipped"  delay={0.95} />
-            <StatBadge value="3+"   label="Years experience"  delay={1.05} />
+            <StatBadge value="1000+" label={t("hero.stats.components")} delay={0.85} />
+            <StatBadge value="20+"   label={t("hero.stats.projects")} delay={0.95} />
+            <StatBadge value="3+"   label={t("hero.stats.years")} delay={1.05} />
           </div>
 
           {/* CTA Buttons — original styles preserved */}
@@ -165,7 +168,7 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Resume
+                {t("hero.cta.resume")}
                 <ArrowUpRight size={14} className="opacity-70" />
               </motion.a>
               <motion.a
@@ -234,8 +237,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6, duration: 0.5 }}
           >
-            <span className="text-primary1">const</span> stack ={" "}
-            <span className="text-green-400">"Next · Node · AI"</span>
+            <span className="text-primary1">{t("hero.tags.stackLabel")}</span>{" "}
+            <span className="text-green-400">"{t("hero.tags.stackValue")}"</span>
           </motion.div>
 
           {/* Floating tag — location */}
@@ -246,7 +249,7 @@ const HeroSection = () => {
             transition={{ delay: 1.8, duration: 0.5 }}
           >
             <span className="text-base">🌍</span>
-            <span>Remote / Worldwide</span>
+            <span>{t("hero.tags.remote")}</span>
           </motion.div>
         </motion.div>
       </div>

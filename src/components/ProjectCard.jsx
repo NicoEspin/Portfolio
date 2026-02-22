@@ -1,7 +1,17 @@
 import { motion } from "framer-motion";
 import { Github, ArrowUpRight, ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const ProjectCard = ({ project, delay, featured = false }) => {
+  const { t } = useTranslation();
+  const baseKey = `projects.items.${project.id}`;
+  const title = t(`${baseKey}.title`);
+  const categoryRaw = t(`${baseKey}.category`, { returnObjects: true });
+  const category = Array.isArray(categoryRaw) ? categoryRaw : [];
+  const description = t(`${baseKey}.description`);
+  const highlightsRaw = t(`${baseKey}.highlights`, { returnObjects: true });
+  const highlights = Array.isArray(highlightsRaw) ? highlightsRaw : [];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -18,7 +28,7 @@ const ProjectCard = ({ project, delay, featured = false }) => {
       <div className={`relative overflow-hidden ${featured ? "h-[260px] sm:h-[320px]" : "h-[200px] sm:h-[220px]"}`}>
         <motion.img
           src={project.image}
-          alt={project.title}
+          alt={title}
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -29,7 +39,7 @@ const ProjectCard = ({ project, delay, featured = false }) => {
 
         {/* Category tags — top left */}
         <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-          {project.category?.map((cat, i) => (
+          {category.map((cat, i) => (
             <span
               key={i}
               className="text-[10px] px-2.5 py-1 rounded-full border border-white/20 bg-black/50 backdrop-blur-sm text-text1/70 font-medium"
@@ -61,7 +71,7 @@ const ProjectCard = ({ project, delay, featured = false }) => {
         {/* Title + live link */}
         <div className="flex items-start justify-between gap-3">
           <h3 className={`font-bold text-text1 leading-tight ${featured ? "text-xl sm:text-2xl" : "text-base sm:text-lg"}`}>
-            {project.title}
+            {title}
           </h3>
           <motion.a
             href={project.link}
@@ -73,7 +83,7 @@ const ProjectCard = ({ project, delay, featured = false }) => {
               transition-all duration-200"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            title="Live preview"
+            title={t("projects.cta.livePreviewTitle")}
           >
             <ExternalLink size={13} />
           </motion.a>
@@ -81,13 +91,13 @@ const ProjectCard = ({ project, delay, featured = false }) => {
 
         {/* Description */}
         <p className="text-xs sm:text-sm text-text1/55 leading-relaxed line-clamp-3">
-          {project.description}
+          {description}
         </p>
 
         {/* Highlights */}
-        {project.highlights && (
+        {highlights.length > 0 && (
           <ul className="flex flex-col gap-1.5">
-            {project.highlights.slice(0, 2).map((h, i) => (
+            {highlights.slice(0, 2).map((h, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="flex-shrink-0 mt-[6px] w-1 h-1 rounded-full bg-primary1/50" />
                 <span className="text-[11px] sm:text-xs text-text1/45 leading-relaxed">{h}</span>
@@ -131,7 +141,7 @@ const ProjectCard = ({ project, delay, featured = false }) => {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
           >
-            Live Preview
+            {t("projects.cta.livePreview")}
             <ArrowUpRight size={13} className="opacity-70" />
           </motion.a>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, X, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 /**
  * Helpers: URLs + rendering + preview
@@ -407,17 +408,28 @@ function LinkPreview({ url }) {
  */
 
 export function ChatWidget() {
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState(() => [
     {
       role: "assistant",
-      content:
-        "Hi 👋 I'm Coquito, Nico's portfolio assistant. What would you like to know?",
+      meta: "welcome",
+      content: t("chat.welcome"),
     },
   ]);
+
+  // If user hasn't interacted yet, keep the welcome message localized.
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length !== 1) return prev;
+      if (prev[0]?.meta !== "welcome") return prev;
+      return [{ ...prev[0], content: t("chat.welcome") }];
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.resolvedLanguage, i18n.language]);
 
   const listRef = useRef(null);
 
@@ -528,9 +540,9 @@ export function ChatWidget() {
           if (eventType === "error") {
             try {
               const parsed = JSON.parse(dataStr || "{}");
-              setAssistantToError(parsed?.message || "Stream error.");
+              setAssistantToError(parsed?.message || t("chat.errors.stream"));
             } catch {
-              setAssistantToError("Stream error.");
+              setAssistantToError(t("chat.errors.stream"));
             }
             continue;
           }
@@ -551,7 +563,7 @@ export function ChatWidget() {
         next[assistantIndex] = {
           role: "assistant",
           content:
-            "Oops — there was an error connecting to the chat. Please try again in a few seconds.",
+            t("chat.errors.connect"),
         };
         return next;
       });
@@ -567,7 +579,7 @@ export function ChatWidget() {
           key="chat-fab"
           type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open chat"
+          aria-label={t("chat.aria.open")}
           className="fixed bottom-6 right-6 z-50 flex justify-center items-center size-14 border rounded-full border-primary1 text-text1 bg-custom-gradient shadow-custom-shadow"
           initial={{ opacity: 0, scale: 0.92, y: 6 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -598,14 +610,14 @@ export function ChatWidget() {
               </div>
               <div className="leading-tight">
                 <div className="font-bold text-text1">Coquito</div>
-                <div className="text-xs text-text2">Portfolio assistant</div>
+                <div className="text-xs text-text2">{t("chat.subtitle")}</div>
               </div>
             </div>
 
             <button
               onClick={() => setOpen(false)}
               className="size-9 rounded-full flex items-center justify-center border border-primary1/20 hover:border-primary1/40 hover:bg-background3 transition"
-              aria-label="Close chat"
+              aria-label={t("chat.aria.close")}
             >
               <X className="w-4 h-4 text-text1" />
             </button>
@@ -648,7 +660,7 @@ export function ChatWidget() {
                   {m.content ? (
                     <MessageContent content={m.content} />
                   ) : m.role === "assistant" && loading ? (
-                    <span className="text-text2">Typing…</span>
+                    <span className="text-text2">{t("chat.typing")}</span>
                   ) : null}
 
                   {!isUser && !isStreaming && uniquePreviewUrls.length > 0 ? (
@@ -670,7 +682,7 @@ export function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => (e.key === "Enter" ? send() : null)}
-                placeholder="Ask about experience, projects, stack…"
+                placeholder={t("chat.placeholder")}
                 className="flex-1 bg-background3 py-3 outline-none px-4 placeholder:text-text2 text-white rounded-lg border-none font-medium"
               />
 
@@ -683,7 +695,7 @@ export function ChatWidget() {
                 whileTap={canSend ? { scale: 0.95 } : undefined}
               >
                 <span className="hidden sm:inline">
-                  {loading ? "Sending..." : "Send"}
+                  {loading ? t("chat.sending") : t("chat.send")}
                 </span>
               </motion.button>
             </div>
