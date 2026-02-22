@@ -283,21 +283,21 @@ export const projects = [
       "SEO-optimized for creative professionals",
     ],
   },
-  {
-    title: "Admin Dashboard",
-    category: ["Frontend", "Dashboard", "Data Viz"],
-    description:
-      "Comprehensive analytics dashboard with interactive data visualization, real-time metrics, and intuitive user management interface",
-    image: "/projects/dashboard.webp",
-    stack: ["React.js", "Tailwind CSS", "Recharts", "Framer Motion", "Vercel"],
-    link: "https://admin-dashboard-2hf2.vercel.app/",
-    github: "https://github.com/NicoEspin/Admin-Dashboard",
-    highlights: [
-      "Interactive charts and graphs",
-      "Dark/light mode toggle",
-      "Responsive data tables",
-    ],
-  },
+  // {
+  //   title: "Admin Dashboard",
+  //   category: ["Frontend", "Dashboard", "Data Viz"],
+  //   description:
+  //     "Comprehensive analytics dashboard with interactive data visualization, real-time metrics, and intuitive user management interface",
+  //   image: "/projects/dashboard.webp",
+  //   stack: ["React.js", "Tailwind CSS", "Recharts", "Framer Motion", "Vercel"],
+  //   link: "https://admin-dashboard-2hf2.vercel.app/",
+  //   github: "https://github.com/NicoEspin/Admin-Dashboard",
+  //   highlights: [
+  //     "Interactive charts and graphs",
+  //     "Dark/light mode toggle",
+  //     "Responsive data tables",
+  //   ],
+  // },
   // {
   //   title: "VirtualR",
   //   category: ["Frontend", "Landing Page", "Marketing"],
@@ -317,7 +317,7 @@ export const projects = [
 
 // CONTACT SECTION
 export const contactInfo = {
-  email: "nico.espin7@gmail.com",
+  email: "nicolasespin.dev@gmail.com",
   location: "Remote / Available Worldwide",
   availability: "Open to full-time opportunities and freelance projects",
 };
