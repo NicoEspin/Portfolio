@@ -197,26 +197,10 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Rotating ring with glowing dot */}
-          <motion.div
-            className="absolute inset-0 rounded-full border border-primary1/10"
-            style={{ transform: "scale(1.25)" }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary1"
-              style={{ boxShadow: "0 0 12px rgba(139,92,246,0.9)" }}
-            />
-          </motion.div>
+       
 
           {/* Counter-rotating dashed ring */}
-          <motion.div
-            className="absolute inset-0 rounded-full border border-dashed border-white/[0.05]"
-            style={{ transform: "scale(1.5)" }}
-            animate={{ rotate: -360 }}
-            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-          />
+       
 
           {/* BG animation blob */}
           <div
