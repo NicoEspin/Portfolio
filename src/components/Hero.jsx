@@ -16,7 +16,6 @@ import { Tilt } from "react-tilt";
 
 import { SectionWrapper } from "../hoc";
 
-// Subtle grid overlay
 const GridLines = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <svg
@@ -33,7 +32,6 @@ const GridLines = () => (
   </div>
 );
 
-// Reusable fade-in with direct animate (no variant inheritance needed)
 const FadeIn = ({ children, delay = 0, direction = "up", className = "" }) => {
   const dirMap = {
     up:    { y: 24, x: 0 },
@@ -53,16 +51,15 @@ const FadeIn = ({ children, delay = 0, direction = "up", className = "" }) => {
   );
 };
 
-// Stat badge
 const StatBadge = ({ value, label, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay, ease: "easeOut" }}
-    className="flex flex-col items-center gap-1 px-5 py-3 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm"
+    className="flex flex-col items-center gap-1 px-4 py-2.5 rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm flex-1 min-w-[80px]"
   >
-    <span className="text-xl font-bold text-primary1 leading-none">{value}</span>
-    <span className="text-[10px] text-text1/45 uppercase tracking-widest whitespace-nowrap">{label}</span>
+    <span className="text-lg font-bold text-primary1 leading-none">{value}</span>
+    <span className="text-[9px] text-text1/45 uppercase tracking-widest text-center">{label}</span>
   </motion.div>
 );
 
@@ -74,39 +71,37 @@ const HeroSection = () => {
   return (
     <main className="relative mx-auto px-5 py-10 lg:pt-16 md:px-20 lg:px-10 overflow-hidden min-h-screen flex items-center">
 
-      {/* Subtle grid */}
       <GridLines />
 
-      {/* Main layout */}
-      <div className="relative z-10 w-full flex flex-col-reverse gap-16 lg:gap-0 lg:flex-row lg:items-center lg:justify-between py-8">
+      <div className="relative z-10 w-full flex flex-col-reverse gap-8 sm:gap-10 lg:gap-0 lg:flex-row lg:items-center lg:justify-between py-8">
 
         {/* ─── LEFT COLUMN ─── */}
-        <div className="flex flex-col items-start justify-center gap-8 w-full lg:max-w-[55%]">
+        <div className="flex flex-col items-start justify-center gap-5 sm:gap-6 lg:gap-8 w-full lg:max-w-[55%]">
 
           {/* Availability badge */}
           <FadeIn delay={0.1} direction="down">
             <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-primary1/30 bg-primary1/5 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-            </span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+              </span>
               <span className="text-xs text-text1/60 tracking-widest uppercase">
                 {t("hero.badge.available")}
               </span>
             </div>
           </FadeIn>
 
-          {/* Name — split for visual weight */}
+          {/* Name */}
           <div className="flex flex-col gap-0">
             <FadeIn delay={0.2} direction="left">
-              <h1 className="text-5xl font-black lg:text-7xl text-text1 uppercase tracking-tight leading-none">
+              <h1 className="text-4xl font-black sm:text-5xl lg:text-7xl text-text1 uppercase tracking-tight leading-none">
                 {firstName}
               </h1>
             </FadeIn>
             <FadeIn delay={0.35} direction="left">
               <div className="flex items-center gap-4">
                 <h1
-                  className="text-5xl font-black lg:text-7xl uppercase tracking-tight leading-none"
+                  className="text-4xl font-black sm:text-5xl lg:text-7xl uppercase tracking-tight leading-none"
                   style={{
                     WebkitTextStroke: "1.5px rgba(167, 139, 250, 0.7)",
                     color: "transparent",
@@ -114,7 +109,6 @@ const HeroSection = () => {
                 >
                   {lastName}
                 </h1>
-                {/* Decorative accent line */}
                 <motion.div
                   className="h-[3px] bg-gradient-to-r from-primary1 to-transparent rounded-full hidden lg:block"
                   initial={{ width: 0 }}
@@ -128,8 +122,8 @@ const HeroSection = () => {
           {/* Typewriter role */}
           <FadeIn delay={0.5} direction="left">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-[2px] bg-primary1 rounded-full flex-shrink-0" />
-              <h2 className="text-lg font-semibold md:text-xl lg:text-2xl text-primary1/90 font-mono">
+              <div className="w-6 lg:w-8 h-[2px] bg-primary1 rounded-full flex-shrink-0" />
+              <h2 className="text-base font-semibold sm:text-lg lg:text-2xl text-primary1/90 font-mono">
                 <Typewriter
                   options={{
                     strings: t("hero.roles", { returnObjects: true }),
@@ -146,25 +140,25 @@ const HeroSection = () => {
 
           {/* Description */}
           <FadeIn delay={0.7} direction="up">
-            <p className="text-sm md:text-base lg:text-[15px] lg:max-w-[520px] text-text1/55 leading-relaxed">
+            <p className="text-sm lg:text-[15px] lg:max-w-[520px] text-text1/55 leading-relaxed">
               {t("hero.description")}
             </p>
           </FadeIn>
 
-          {/* Stats row */}
-          <div className="flex gap-4 flex-wrap">
+          {/* Stats row — ahora ocupa todo el ancho disponible en mobile */}
+          <div className="flex gap-3 w-full sm:w-auto sm:flex-none">
             <StatBadge value="1000+" label={t("hero.stats.components")} delay={0.85} />
-            <StatBadge value="20+"   label={t("hero.stats.projects")} delay={0.95} />
-            <StatBadge value="3+"   label={t("hero.stats.years")} delay={1.05} />
+            <StatBadge value="20+"   label={t("hero.stats.projects")}   delay={0.95} />
+            <StatBadge value="3+"    label={t("hero.stats.years")}      delay={1.05} />
           </div>
 
-          {/* CTA Buttons — original styles preserved */}
+          {/* CTA Buttons */}
           <FadeIn delay={1.15} direction="up">
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-3 items-center">
               <motion.a
                 href={resumeLink}
                 target="_blank"
-                className="text-center w-[150px] md:w-[200px] p-2 rounded-full border border-primary1 text-text1 bg-custom-gradient flex-grow-0 shadow-custom-shadow flex items-center justify-center gap-2"
+                className="text-center w-[140px] sm:w-[180px] md:w-[200px] p-2 rounded-full border border-primary1 text-text1 bg-custom-gradient flex-grow-0 shadow-custom-shadow flex items-center justify-center gap-2 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -174,20 +168,20 @@ const HeroSection = () => {
               <motion.a
                 href={githubLink}
                 target="_blank"
-                className="flex justify-center items-center size-11 border rounded-full border-primary1 text-text1 bg-custom-gradient shadow-custom-shadow"
+                className="flex justify-center items-center size-10 sm:size-11 border rounded-full border-primary1 text-text1 bg-custom-gradient shadow-custom-shadow"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Github size={18} />
+                <Github size={17} />
               </motion.a>
               <motion.a
                 href={linkedinLink}
                 target="_blank"
-                className="flex justify-center items-center size-11 border rounded-full border-primary1 text-text1 bg-custom-gradient shadow-custom-shadow"
+                className="flex justify-center items-center size-10 sm:size-11 border rounded-full border-primary1 text-text1 bg-custom-gradient shadow-custom-shadow"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Linkedin size={18} />
+                <Linkedin size={17} />
               </motion.a>
             </div>
           </FadeIn>
@@ -195,20 +189,15 @@ const HeroSection = () => {
 
         {/* ─── RIGHT COLUMN — Profile Image ─── */}
         <motion.div
-          className="relative flex justify-center order-1 lg:order-2 items-center w-full max-w-[320px] mx-auto lg:mx-0 lg:max-w-[380px]"
+          className="relative flex justify-center order-1 lg:order-2 items-center w-full max-w-[220px] sm:max-w-[260px] mx-auto lg:mx-0 lg:max-w-[380px]"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-       
-
-          {/* Counter-rotating dashed ring */}
-       
-
-          {/* BG animation blob */}
+          {/* BG animation — translateY relativo en mobile para no salirse */}
           <div
             className="absolute inset-0 z-0 flex items-center justify-center"
-            style={{ transform: "scale(1.5) translateY(105px)" }}
+            style={{ transform: "scale(1.5) translateY(15%)" }}
           >
             <BgAnimation className="w-full h-full" />
           </div>
@@ -225,14 +214,14 @@ const HeroSection = () => {
           >
             <img
               src="./Yo-profile.webp"
-              className="relative rounded-full max-h-[300px] max-w-[300px] z-10 border-2 border-primary1 shadow-custom-shadow lg:min-w-[300px] lg:min-h-[300px]"
+              className="relative rounded-full w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[300px] lg:h-[300px] z-10 border-2 border-primary1 shadow-custom-shadow object-cover"
               alt={name}
             />
           </Tilt>
 
-          {/* Floating tag — tech stack */}
+          {/* Floating tag — tech stack — reposicionado para mobile */}
           <motion.div
-            className="absolute -bottom-4 -left-6 z-20 px-3 py-2 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md text-xs text-text1/70 font-mono"
+            className="absolute -bottom-5 left-0 sm:-left-6 z-20 px-2.5 py-1.5 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md text-[10px] sm:text-xs text-text1/70 font-mono whitespace-nowrap"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6, duration: 0.5 }}
@@ -241,19 +230,18 @@ const HeroSection = () => {
             <span className="text-green-400">"{t("hero.tags.stackValue")}"</span>
           </motion.div>
 
-          {/* Floating tag — location */}
+          {/* Floating tag — location — reposicionado para mobile */}
           <motion.div
-            className="absolute -top-2 -right-4 z-20 px-3 py-2 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md text-xs text-text1/70 flex items-center gap-2"
+            className="absolute -top-3 right-0 sm:-right-4 z-20 px-2.5 py-1.5 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md text-[10px] sm:text-xs text-text1/70 flex items-center gap-1.5 whitespace-nowrap"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.8, duration: 0.5 }}
           >
-            <span className="text-base">🌍</span>
+            <span className="text-sm">🌍</span>
             <span>{t("hero.tags.remote")}</span>
           </motion.div>
         </motion.div>
       </div>
-
     </main>
   );
 };
