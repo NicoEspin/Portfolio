@@ -539,7 +539,7 @@ export function ChatWidget() {
           exit={{ opacity: 0, scale: 0.85, y: 8 }}
           whileHover={{ scale: 1.12 }}
           whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 320, damping: 22 }}
+          transition={{ type: "spring", stiffness: 420, damping: 24 }}
         >
           <Bot className="w-6 h-6" />
           {/* Unread pulse ring */}
@@ -549,15 +549,15 @@ export function ChatWidget() {
         /* ── Panel ── */
         <motion.div
           key="chat-panel"
-          initial={{ opacity: 0, y: 16, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 16, scale: 0.97 }}
-          transition={{ type: "spring", stiffness: 280, damping: 26 }}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 4 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
           className="
             fixed z-[160]
             bottom-0 left-0 right-0
             w-full h-[85dvh]
-            
+            sm:left-auto sm:right-6 sm:bottom-6
             sm:w-[min(440px,calc(100vw-2rem))]
             sm:h-[min(620px,calc(100dvh-2rem))]
             sm:rounded-2xl
